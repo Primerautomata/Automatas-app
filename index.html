@@ -9,340 +9,124 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --wood-dark: #3d2b1f;
-    --wood-mid: #7a4f2d;
-    --wood-light: #c4894e;
-    --wood-pale: #e8c99a;
-    --wood-grain: #f2dfc0;
-    --cream: #faf6ef;
-    --ink: #1c120a;
-    --accent: #c0392b;
-    --accent-light: #e74c3c;
-    --steel: #8a9ba8;
-    --steel-dark: #3a4a54;
-    --shadow: rgba(28,18,10,0.18);
-    --card-bg: #fffdf8;
+    --wood-dark: #3d2b1f; --wood-mid: #7a4f2d; --wood-light: #c4894e;
+    --wood-pale: #e8c99a; --cream: #faf6ef; --ink: #1c120a;
+    --accent: #c0392b; --steel: #8a9ba8; --steel-dark: #3a4a54;
+    --shadow: rgba(28,18,10,0.18); --card-bg: #fffdf8;
   }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background-color: var(--cream);
-    background-image: 
-      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(196,137,78,0.07) 39px, rgba(196,137,78,0.07) 40px),
-      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(196,137,78,0.07) 39px, rgba(196,137,78,0.07) 40px);
-    font-family: 'DM Sans', sans-serif;
-    color: var(--ink);
-    min-height: 100vh;
-  }
-
-  /* ── HEADER ── */
-  header {
-    background: var(--wood-dark);
-    background-image: 
-      repeating-linear-gradient(92deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 2px, transparent 2px, transparent 60px),
-      repeating-linear-gradient(178deg, rgba(0,0,0,0.08) 0px, rgba(0,0,0,0.08) 1px, transparent 1px, transparent 40px);
-    padding: 28px 40px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 3px solid var(--wood-light);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.35);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  .header-left { display: flex; align-items: center; gap: 16px; }
-
-  .logo-icon {
-    width: 44px; height: 44px;
-    background: var(--wood-light);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
-  }
-
-  h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.55rem;
-    font-weight: 700;
-    color: var(--wood-pale);
-    letter-spacing: 0.01em;
-    line-height: 1.1;
-  }
-  h1 span {
-    display: block;
-    font-size: 0.72rem;
-    font-family: 'DM Mono', monospace;
-    font-weight: 300;
-    color: var(--wood-light);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-top: 2px;
-  }
-
-  /* Scale control in header */
-  .scale-control {
-    display: flex; align-items: center; gap: 12px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(196,137,78,0.3);
-    border-radius: 10px;
-    padding: 10px 16px;
-  }
-  .scale-control label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--wood-light);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  .scale-control input[type=range] {
-    width: 100px;
-    accent-color: var(--wood-light);
-    cursor: pointer;
-  }
-  .scale-badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.78rem;
-    font-weight: 500;
-    color: var(--wood-pale);
-    background: rgba(196,137,78,0.2);
-    padding: 3px 8px;
-    border-radius: 5px;
-    min-width: 42px;
-    text-align: center;
-  }
-
-  /* ── MECHANISM GRID ── */
-  .grid-wrapper {
-    max-width: 1320px;
-    margin: 0 auto;
-    padding: 36px 28px 60px;
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.82rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--wood-mid);
-    margin-bottom: 24px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--wood-pale);
-    display: flex; align-items: center; gap: 10px;
-  }
-  .section-title::before {
-    content: '';
-    display: inline-block;
-    width: 22px; height: 2px;
-    background: var(--wood-light);
-  }
-
-  .mech-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 24px;
-  }
-
-  /* ── CARD ── */
-  .card {
-    background: var(--card-bg);
-    border: 1px solid var(--wood-pale);
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px var(--shadow), 0 0 0 0 transparent;
-    transition: transform 0.22s ease, box-shadow 0.22s ease;
-    position: relative;
-  }
-  .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 28px rgba(61,43,31,0.16);
-  }
-
-  .card-header {
-    background: var(--wood-dark);
-    background-image: repeating-linear-gradient(92deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 2px, transparent 2px, transparent 50px);
-    padding: 14px 18px 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 2px solid var(--wood-light);
-  }
-
-  .card-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.7rem;
-    color: var(--wood-mid);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
-  .card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--wood-pale);
-    flex: 1;
-    padding: 0 12px;
-  }
-
-  .play-btn {
-    background: none;
-    border: 1.5px solid var(--wood-light);
-    color: var(--wood-light);
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px;
-    transition: all 0.18s;
-    flex-shrink: 0;
-  }
-  .play-btn:hover, .play-btn.paused {
-    background: var(--wood-light);
-    color: var(--wood-dark);
-  }
-  .play-btn.paused { background: var(--accent); border-color: var(--accent); color: white; }
-
-  /* Canvas area */
-  .canvas-wrap {
-    background: #fefcf8;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 220px;
-    position: relative;
-    overflow: hidden;
-  }
-  .canvas-wrap canvas {
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
-  }
-
-  /* Info panel */
-  .card-info {
-    padding: 14px 18px 16px;
-    border-top: 1px solid var(--wood-pale);
-  }
-
-  .info-tabs {
-    display: flex;
-    gap: 0;
-    margin-bottom: 12px;
-    border-bottom: 1px solid var(--wood-pale);
-  }
-  .tab-btn {
-    background: none;
-    border: none;
-    padding: 6px 14px 8px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--wood-mid);
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    transition: all 0.15s;
-  }
-  .tab-btn.active {
-    color: var(--wood-dark);
-    border-bottom-color: var(--wood-light);
-    font-weight: 500;
-  }
-
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
-
-  /* Measures table */
-  .measures-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.82rem;
-  }
-  .measures-table tr:not(:last-child) td { border-bottom: 1px solid rgba(196,137,78,0.15); }
-  .measures-table td {
-    padding: 5px 4px;
-    vertical-align: middle;
-  }
-  .measures-table td:first-child {
-    color: var(--wood-mid);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.73rem;
-    letter-spacing: 0.04em;
-    width: 55%;
-  }
-  .measure-val {
-    font-family: 'DM Mono', monospace;
-    font-weight: 500;
-    color: var(--ink);
-    background: rgba(196,137,78,0.1);
-    padding: 2px 7px;
-    border-radius: 4px;
-    font-size: 0.78rem;
-  }
-
-  .desc-text {
-    font-size: 0.82rem;
-    line-height: 1.65;
-    color: #4a3520;
-  }
-  .desc-text strong {
-    color: var(--wood-dark);
-    font-weight: 500;
-  }
-
-  .difficulty-badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.66rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 3px 9px;
-    border-radius: 20px;
-    margin-top: 10px;
-  }
-  .diff-beginner { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
-  .diff-intermediate { background: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
-  .diff-advanced { background: #fce4ec; color: #c62828; border: 1px solid #f48fb1; }
-
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 24px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    color: var(--wood-mid);
-    border-top: 1px solid var(--wood-pale);
-  }
-
-  @media (max-width: 640px) {
-    header { flex-direction: column; gap: 14px; padding: 18px 20px; }
-    .mech-grid { grid-template-columns: 1fr; }
-    .grid-wrapper { padding: 20px 14px 40px; }
-  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background-color:var(--cream);background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(196,137,78,0.07) 39px,rgba(196,137,78,0.07) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(196,137,78,0.07) 39px,rgba(196,137,78,0.07) 40px);font-family:'DM Sans',sans-serif;color:var(--ink);min-height:100vh}
+  header{background:var(--wood-dark);background-image:repeating-linear-gradient(92deg,rgba(255,255,255,0.015) 0px,rgba(255,255,255,0.015) 2px,transparent 2px,transparent 60px);padding:18px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--wood-light);box-shadow:0 4px 24px rgba(0,0,0,0.35);position:sticky;top:0;z-index:200;gap:12px;flex-wrap:wrap}
+  .header-left{display:flex;align-items:center;gap:12px}
+  .logo-icon{width:38px;height:38px;background:var(--wood-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,0.3);flex-shrink:0}
+  h1{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--wood-pale);line-height:1.1}
+  h1 span{display:block;font-size:0.66rem;font-family:'DM Mono',monospace;font-weight:300;color:var(--wood-light);letter-spacing:0.18em;text-transform:uppercase;margin-top:2px}
+  .header-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .scale-control{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,0.07);border:1px solid rgba(196,137,78,0.3);border-radius:10px;padding:7px 13px}
+  .scale-control label{font-family:'DM Mono',monospace;font-size:0.67rem;color:var(--wood-light);letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap}
+  .scale-control input[type=range]{width:85px;accent-color:var(--wood-light);cursor:pointer}
+  .scale-badge{font-family:'DM Mono',monospace;font-size:0.74rem;font-weight:500;color:var(--wood-pale);background:rgba(196,137,78,0.2);padding:3px 7px;border-radius:5px;min-width:38px;text-align:center}
+  .header-btn{background:rgba(255,255,255,0.08);border:1.5px solid rgba(196,137,78,0.4);color:var(--wood-pale);padding:7px 13px;border-radius:8px;font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.07em;cursor:pointer;transition:all 0.18s;white-space:nowrap}
+  .header-btn:hover{background:var(--wood-light);color:var(--wood-dark);border-color:var(--wood-light)}
+  .grid-wrapper{max-width:1320px;margin:0 auto;padding:26px 22px 60px}
+  .section-title{font-family:'Playfair Display',serif;font-size:0.78rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--wood-mid);margin-bottom:18px;padding-bottom:9px;border-bottom:1px solid var(--wood-pale);display:flex;align-items:center;gap:10px}
+  .section-title::before{content:'';display:inline-block;width:20px;height:2px;background:var(--wood-light)}
+  .mech-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px}
+  .card{background:var(--card-bg);border:1px solid var(--wood-pale);border-radius:14px;overflow:hidden;box-shadow:0 2px 12px var(--shadow);transition:transform 0.22s ease,box-shadow 0.22s ease}
+  .card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(61,43,31,0.16)}
+  .card-header{background:var(--wood-dark);background-image:repeating-linear-gradient(92deg,rgba(255,255,255,0.012) 0px,rgba(255,255,255,0.012) 2px,transparent 2px,transparent 50px);padding:11px 15px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--wood-light);gap:7px}
+  .card-num{font-family:'Playfair Display',serif;font-size:0.67rem;color:var(--wood-mid);letter-spacing:0.14em;text-transform:uppercase;flex-shrink:0}
+  .card-title{font-family:'Playfair Display',serif;font-size:0.98rem;font-weight:700;color:var(--wood-pale);flex:1;padding:0 9px}
+  .card-btns{display:flex;gap:5px;flex-shrink:0}
+  .icon-btn{background:none;border:1.5px solid var(--wood-light);color:var(--wood-light);width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all 0.18s}
+  .icon-btn:hover{background:var(--wood-light);color:var(--wood-dark)}
+  .icon-btn.active{background:var(--accent);border-color:var(--accent);color:white}
+  .canvas-wrap{background:#fefcf8;padding:6px;display:flex;align-items:center;justify-content:center;height:208px;position:relative;overflow:hidden}
+  .canvas-wrap canvas{display:block;max-width:100%;max-height:100%}
+  .step-overlay{position:absolute;bottom:8px;left:0;right:0;display:none;justify-content:center;align-items:center;gap:7px}
+  .step-overlay.visible{display:flex}
+  .step-nav{background:rgba(61,43,31,0.85);border:1px solid var(--wood-light);color:var(--wood-pale);padding:4px 11px;border-radius:20px;font-family:'DM Mono',monospace;font-size:0.68rem;cursor:pointer;transition:all 0.15s}
+  .step-nav:hover{background:var(--wood-light);color:var(--wood-dark)}
+  .step-label{background:rgba(61,43,31,0.9);color:var(--wood-pale);padding:3px 9px;border-radius:12px;font-family:'DM Mono',monospace;font-size:0.65rem;white-space:nowrap}
+  .step-explanation{display:none;padding:7px 15px 9px;background:rgba(196,137,78,0.07);border-top:1px solid rgba(196,137,78,0.18);font-size:0.77rem;color:var(--wood-mid);line-height:1.55}
+  .step-explanation.visible{display:block}
+  .card-info{padding:11px 15px 13px;border-top:1px solid var(--wood-pale)}
+  .info-tabs{display:flex;gap:0;margin-bottom:9px;border-bottom:1px solid var(--wood-pale)}
+  .tab-btn{background:none;border:none;padding:5px 11px 6px;font-family:'DM Mono',monospace;font-size:0.64rem;letter-spacing:0.09em;text-transform:uppercase;color:var(--wood-mid);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s}
+  .tab-btn.active{color:var(--wood-dark);border-bottom-color:var(--wood-light);font-weight:500}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}
+  .measures-table{width:100%;border-collapse:collapse;font-size:0.79rem}
+  .measures-table tr:not(:last-child) td{border-bottom:1px solid rgba(196,137,78,0.14)}
+  .measures-table td{padding:4px 3px;vertical-align:middle}
+  .measures-table td:first-child{color:var(--wood-mid);font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.03em;width:57%}
+  .measure-val{font-family:'DM Mono',monospace;font-weight:500;color:var(--ink);background:rgba(196,137,78,0.1);padding:2px 6px;border-radius:4px;font-size:0.74rem}
+  .pdf-btn{margin-top:9px;width:100%;background:var(--wood-dark);color:var(--wood-pale);border:none;padding:7px 12px;border-radius:7px;font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;cursor:pointer;transition:all 0.18s;display:flex;align-items:center;justify-content:center;gap:6px}
+  .pdf-btn:hover{background:var(--wood-mid)}
+  .parts-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .part-item{background:rgba(196,137,78,0.05);border:1px solid rgba(196,137,78,0.18);border-radius:6px;padding:5px 7px}
+  .part-name{font-family:'DM Mono',monospace;font-size:0.64rem;color:var(--wood-mid);letter-spacing:0.03em;margin-bottom:1px}
+  .part-dim{font-family:'DM Mono',monospace;font-size:0.73rem;font-weight:500;color:var(--ink)}
+  .part-canvas{width:100%;height:40px;display:block;margin-top:3px;border-radius:4px;background:#fefcf8}
+  .desc-text{font-size:0.79rem;line-height:1.65;color:#4a3520}
+  .desc-text strong{color:var(--wood-dark);font-weight:500}
+  .difficulty-badge{display:inline-flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:0.63rem;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-top:8px}
+  .diff-beginner{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
+  .diff-intermediate{background:#fff8e1;color:#f57f17;border:1px solid #ffe082}
+  .diff-advanced{background:#fce4ec;color:#c62828;border:1px solid #f48fb1}
+  /* MODALS */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(28,18,10,0.65);z-index:500;align-items:center;justify-content:center;padding:16px}
+  .modal-overlay.open{display:flex}
+  .modal{background:var(--card-bg);border:2px solid var(--wood-light);border-radius:16px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.4)}
+  .modal-header{background:var(--wood-dark);padding:15px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--wood-light);border-radius:14px 14px 0 0}
+  .modal-title{font-family:'Playfair Display',serif;font-size:1.08rem;color:var(--wood-pale)}
+  .modal-close{background:none;border:none;color:var(--wood-light);font-size:20px;cursor:pointer;padding:0 4px;line-height:1}
+  .modal-close:hover{color:var(--accent)}
+  .modal-body{padding:18px 20px}
+  .calc-label{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--wood-mid);margin-bottom:7px;display:block}
+  .calc-section{margin-bottom:18px}
+  .calc-mechs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:14px}
+  .calc-mech-btn{background:rgba(196,137,78,0.07);border:1.5px solid rgba(196,137,78,0.28);color:var(--wood-mid);padding:6px 4px;border-radius:7px;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.02em;text-align:center;cursor:pointer;transition:all 0.15s;line-height:1.3}
+  .calc-mech-btn:hover{border-color:var(--wood-light);color:var(--wood-dark)}
+  .calc-mech-btn.selected{background:var(--wood-light);border-color:var(--wood-dark);color:var(--wood-dark);font-weight:500}
+  .qty-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .qty-input{background:white;border:1.5px solid var(--wood-pale);border-radius:8px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:1rem;width:76px;text-align:center;color:var(--ink)}
+  .qty-input:focus{outline:none;border-color:var(--wood-light)}
+  .calc-result{background:rgba(196,137,78,0.07);border:1px solid rgba(196,137,78,0.22);border-radius:10px;padding:13px 15px}
+  .calc-result-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0}
+  .calc-result-row:not(:last-child){border-bottom:1px solid rgba(196,137,78,0.14)}
+  .calc-result-label{font-size:0.78rem;color:var(--wood-mid)}
+  .calc-result-val{font-family:'DM Mono',monospace;font-weight:500;font-size:0.85rem;color:var(--ink)}
+  .calc-total{font-size:0.95rem!important;color:var(--wood-dark)!important;font-weight:700!important}
+  .combo-select-area{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:14px}
+  .combo-slot{background:rgba(196,137,78,0.04);border:2px dashed rgba(196,137,78,0.28);border-radius:10px;padding:11px}
+  .combo-slot-label{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--wood-mid);margin-bottom:7px}
+  .combo-slot select{width:100%;background:white;border:1.5px solid var(--wood-pale);border-radius:6px;padding:5px 7px;font-family:'DM Sans',sans-serif;font-size:0.8rem;color:var(--ink);cursor:pointer}
+  .combo-slot select:focus{outline:none;border-color:var(--wood-light)}
+  .combo-result{background:rgba(196,137,78,0.05);border:1px solid rgba(196,137,78,0.18);border-radius:10px;padding:13px}
+  .combo-canvas-wrap{background:#fefcf8;border-radius:8px;margin-bottom:11px;display:flex;align-items:center;justify-content:center;height:155px;overflow:hidden}
+  .combo-desc{font-size:0.79rem;line-height:1.6;color:#4a3520}
+  .combo-desc strong{color:var(--wood-dark)}
+  .combo-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
+  .combo-tag{background:rgba(196,137,78,0.14);border:1px solid rgba(196,137,78,0.28);color:var(--wood-mid);padding:3px 8px;border-radius:20px;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.05em}
+  footer{text-align:center;padding:20px;font-family:'DM Mono',monospace;font-size:0.64rem;letter-spacing:0.1em;color:var(--wood-mid);border-top:1px solid var(--wood-pale)}
+  @media(max-width:640px){header{padding:13px 15px}.mech-grid{grid-template-columns:1fr}.grid-wrapper{padding:14px 11px 36px}.calc-mechs{grid-template-columns:repeat(2,1fr)}.combo-select-area{grid-template-columns:1fr}.parts-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
 <header>
   <div class="header-left">
-    <div class="logo-icon">⚙️</div>
-    <h1>
-      Autómatas de Madera
-      <span>Simulador de Mecanismos</span>
-    </h1>
+    <div class="logo-icon">&#9881;&#65039;</div>
+    <h1>Automatas de Madera<span>Simulador de Mecanismos</span></h1>
   </div>
-  <div class="scale-control">
-    <label>Escala</label>
-    <input type="range" id="globalScale" min="0.6" max="1.4" step="0.1" value="1.0">
-    <div class="scale-badge" id="scaleBadge">1.0×</div>
+  <div class="header-controls">
+    <div class="scale-control">
+      <label>Escala</label>
+      <input type="range" id="globalScale" min="0.6" max="1.4" step="0.1" value="1.0">
+      <div class="scale-badge" id="scaleBadge">1.0x</div>
+    </div>
+    <button class="header-btn" id="calcBtn">&#127795; Calculadora</button>
+    <button class="header-btn" id="comboBtn">&#128279; Combinador</button>
   </div>
 </header>
 
@@ -351,874 +135,364 @@
   <div class="mech-grid" id="mechGrid"></div>
 </div>
 
-<footer>Simulador Educativo de Autómatas de Madera &nbsp;·&nbsp; Animaciones a escala real &nbsp;·&nbsp; Medidas en milímetros</footer>
+<footer>Simulador Educativo de Automatas de Madera &nbsp;&middot;&nbsp; Animaciones a escala real &nbsp;&middot;&nbsp; Medidas en milimetros</footer>
+
+<!-- CALCULADORA -->
+<div class="modal-overlay" id="calcModal">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">&#127795; Calculadora de Madera</span>
+      <button class="modal-close" id="calcClose">&#10005;</button>
+    </div>
+    <div class="modal-body">
+      <div class="calc-section">
+        <span class="calc-label">1. Elegí el mecanismo</span>
+        <div class="calc-mechs" id="calcMechBtns"></div>
+      </div>
+      <div class="calc-section">
+        <span class="calc-label">2. ¿Cuántos autómatas querés hacer?</span>
+        <div class="qty-row">
+          <input type="number" class="qty-input" id="calcQty" min="1" max="50" value="1">
+          <span style="font-size:0.8rem;color:var(--wood-mid)">unidades</span>
+        </div>
+      </div>
+      <div class="calc-section">
+        <span class="calc-label">3. Resultado</span>
+        <div class="calc-result" id="calcResult">
+          <div style="text-align:center;color:var(--wood-mid);font-size:0.79rem;padding:10px 0">Seleccioná un mecanismo para ver el cálculo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMBINADOR -->
+<div class="modal-overlay" id="comboModal">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">&#128279; Combinador de Mecanismos</span>
+      <button class="modal-close" id="comboClose">&#10005;</button>
+    </div>
+    <div class="modal-body">
+      <div class="combo-select-area">
+        <div class="combo-slot">
+          <div class="combo-slot-label">Mecanismo A</div>
+          <select id="comboA"></select>
+        </div>
+        <div class="combo-slot">
+          <div class="combo-slot-label">Mecanismo B</div>
+          <select id="comboB"></select>
+        </div>
+      </div>
+      <div class="combo-result">
+        <div class="combo-canvas-wrap"><canvas id="comboCanvas" width="480" height="148"></canvas></div>
+        <div class="combo-desc" id="comboDesc">Seleccioná dos mecanismos para ver cómo se combinan.</div>
+        <div class="combo-tags" id="comboTags"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
-// ══════════════════════════════════════════════════════
-// MECHANISM DATA
-// ══════════════════════════════════════════════════════
-const MECHANISMS = [
-  {
-    id: 1,
-    name: "Leva Circular",
-    difficulty: "beginner",
-    description: "Una rueda circular montada <strong>fuera de su centro geométrico</strong> empuja un seguidor hacia arriba y abajo al girar. Es el mecanismo más sencillo para generar movimiento vertical con una manivela.",
-    measures: [
-      { part: "Rueda (diámetro)", base: 80 },
-      { part: "Desplazamiento del eje", base: 12 },
-      { part: "Seguidor (largo)", base: 60 },
-      { part: "Seguidor (ancho)", base: 14 },
-      { part: "Guía (alto)", base: 80 },
-      { part: "Espesor de madera", base: 12 },
-    ],
-    draw: drawCamCircular
-  },
-  {
-    id: 2,
-    name: "Leva Excéntrica",
-    difficulty: "beginner",
-    description: "Similar a la leva circular pero con perfil <strong>ovalado</strong>. Produce un movimiento más suave y controlado del seguidor, con diferentes amplitudes según la excentricidad del óvalo.",
-    measures: [
-      { part: "Leva (largo)", base: 90 },
-      { part: "Leva (ancho)", base: 55 },
-      { part: "Desplazamiento del eje", base: 16 },
-      { part: "Seguidor (largo)", base: 65 },
-      { part: "Seguidor (ancho)", base: 14 },
-      { part: "Espesor de madera", base: 12 },
-    ],
-    draw: drawCamEccentrica
-  },
-  {
-    id: 3,
-    name: "Manivela y Biela",
-    difficulty: "intermediate",
-    description: "Convierte rotación continua en <strong>movimiento lineal alternativo</strong>. La manivela gira, la biela transmite la fuerza, y el émbolo se desplaza de extremo a extremo.",
-    measures: [
-      { part: "Manivela (radio)", base: 35 },
-      { part: "Biela (largo)", base: 110 },
-      { part: "Émbolo (largo)", base: 80 },
-      { part: "Émbolo (ancho)", base: 18 },
-      { part: "Guía (largo)", base: 160 },
-      { part: "Espesor de madera", base: 14 },
-    ],
-    draw: drawCrankRod
-  },
-  {
-    id: 4,
-    name: "Trinquete",
-    difficulty: "intermediate",
-    description: "Permite el <strong>movimiento en un solo sentido</strong>. Un diente (el pawl) encaja en la rueda dentada y bloquea el retroceso. Ideal para mecanismos de avance paso a paso.",
-    measures: [
-      { part: "Rueda (diámetro)", base: 80 },
-      { part: "Número de dientes", base: 12 },
-      { part: "Profundidad de diente", base: 8 },
-      { part: "Pawl (largo)", base: 40 },
-      { part: "Pawl (ancho)", base: 10 },
-      { part: "Espesor de madera", base: 14 },
-    ],
-    draw: drawRatchet
-  },
-  {
-    id: 5,
-    name: "Engranajes Simples",
-    difficulty: "intermediate",
-    description: "Dos ruedas dentadas que se engranan para <strong>transmitir rotación</strong> y modificar velocidad o torque. La relación de dientes define cuánto más rápido o más lento gira cada rueda.",
-    measures: [
-      { part: "Piñón (diámetro)", base: 50 },
-      { part: "Piñón (dientes)", base: 10 },
-      { part: "Rueda grande (diámetro)", base: 100 },
-      { part: "Rueda grande (dientes)", base: 20 },
-      { part: "Módulo del diente", base: 5 },
-      { part: "Espesor de madera", base: 14 },
-    ],
-    draw: drawGears
-  },
-  {
-    id: 6,
-    name: "Cremallera y Piñón",
-    difficulty: "intermediate",
-    description: "Transforma <strong>rotación en movimiento lineal</strong> (y viceversa). El piñón es una rueda dentada que rueda sobre una barra dentada (cremallera), desplazándola horizontalmente.",
-    measures: [
-      { part: "Piñón (diámetro)", base: 50 },
-      { part: "Piñón (dientes)", base: 10 },
-      { part: "Cremallera (largo)", base: 200 },
-      { part: "Cremallera (alto)", base: 20 },
-      { part: "Módulo del diente", base: 5 },
-      { part: "Espesor de madera", base: 12 },
-    ],
-    draw: drawRackPinion
-  },
-  {
-    id: 7,
-    name: "Palanca de 1.er Grado",
-    difficulty: "beginner",
-    description: "El punto de apoyo está <strong>entre la fuerza y la carga</strong>. Como una balanza. Multiplicar la distancia del brazo largo permite levantar más peso con menos esfuerzo.",
-    measures: [
-      { part: "Palanca (largo total)", base: 200 },
-      { part: "Brazo de fuerza", base: 130 },
-      { part: "Brazo de carga", base: 70 },
-      { part: "Palanca (ancho)", base: 20 },
-      { part: "Pivote (diámetro)", base: 10 },
-      { part: "Espesor de madera", base: 14 },
-    ],
-    draw: drawLever1
-  },
-  {
-    id: 8,
-    name: "Palanca de 2.do Grado",
-    difficulty: "beginner",
-    description: "La carga está <strong>entre el punto de apoyo y la fuerza aplicada</strong>. Como una carretilla. Siempre ofrece ventaja mecánica mayor a 1.",
-    measures: [
-      { part: "Palanca (largo total)", base: 200 },
-      { part: "Punto de apoyo a carga", base: 70 },
-      { part: "Palanca (ancho)", base: 20 },
-      { part: "Pivote (diámetro)", base: 10 },
-      { part: "Carga (bloque)", base: 30 },
-      { part: "Espesor de madera", base: 14 },
-    ],
-    draw: drawLever2
-  },
-  {
-    id: 9,
-    name: "Leva de Corazón",
-    difficulty: "advanced",
-    description: "Una leva con perfil en forma de corazón genera un <strong>movimiento constante de subida y bajada</strong> sin golpes ni saltos. Muy usada en autómatas con movimientos suaves y continuos.",
-    measures: [
-      { part: "Leva (diámetro ext.)", base: 90 },
-      { part: "Profundidad del corazón", base: 30 },
-      { part: "Seguidor (largo)", base: 70 },
-      { part: "Seguidor (ancho)", base: 14 },
-      { part: "Guía (alto)", base: 100 },
-      { part: "Espesor de madera", base: 14 },
-    ],
-    draw: drawHeartCam
-  },
-  {
-    id: 10,
-    name: "Eje y Excéntrica",
-    difficulty: "intermediate",
-    description: "Un disco montado <strong>descentrado sobre un eje</strong> crea una oscilación circular. Diferentes discos en el mismo eje a distintos ángulos generan movimientos desfasados, perfectos para figuras con múltiples articulaciones.",
-    measures: [
-      { part: "Disco (diámetro)", base: 70 },
-      { part: "Excentricidad", base: 18 },
-      { part: "Eje (diámetro)", base: 10 },
-      { part: "Biela (largo)", base: 90 },
-      { part: "Biela (ancho)", base: 12 },
-      { part: "Espesor de madera", base: 12 },
-    ],
-    draw: drawEccentricShaft
-  },
-  {
-    id: 11,
-    name: "Mecanismo de Vaivén",
-    difficulty: "intermediate",
-    description: "Convierte rotación continua en <strong>oscilación angular alternante</strong>. Una manivela impulsa un brazo que se balancea de un lado al otro, perfecto para simular remos, brazos que saludan o colas que se mueven.",
-    measures: [
-      { part: "Manivela (radio)", base: 30 },
-      { part: "Biela de acoplamiento", base: 100 },
-      { part: "Brazo oscilante (largo)", base: 80 },
-      { part: "Base (distancia entre ejes)", base: 90 },
-      { part: "Ancho de piezas", base: 14 },
-      { part: "Espesor de madera", base: 12 },
-    ],
-    draw: drawRockerCrank
-  },
-  {
-    id: 12,
-    name: "Mecanismo de Balanceo",
-    difficulty: "beginner",
-    description: "Un brazo <strong>pivota sobre su punto central</strong> impulsado por una leva debajo. Al girar la manivela, el brazo se inclina de lado a lado, como un ave que picotea o una figura que saluda.",
-    measures: [
-      { part: "Brazo (largo total)", base: 180 },
-      { part: "Brazo (ancho)", base: 16 },
-      { part: "Leva (diámetro)", base: 60 },
-      { part: "Desplazamiento leva", base: 15 },
-      { part: "Pivote (diámetro)", base: 10 },
-      { part: "Espesor de madera", base: 12 },
-    ],
-    draw: drawBalanceMech
-  }
-];
+const WOOD='#c4894e',WOOD_DARK='#7a4f2d',WOOD_LIGHT='#e8c99a',WOOD_MID='#7a4f2d',STEEL_COL='#8a9ba8',STEEL_DARK='#3a4a54',ACCENT='#c0392b';
+function drawWoodRect(ctx,x,y,w,h,r=5){ctx.save();ctx.beginPath();ctx.roundRect(x,y,w,h,r);const g=ctx.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,WOOD_LIGHT);g.addColorStop(0.4,WOOD);g.addColorStop(1,WOOD_DARK);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=WOOD_DARK;ctx.lineWidth=1.2;ctx.stroke();ctx.restore()}
+function drawWoodCircle(ctx,cx,cy,r){ctx.save();const g=ctx.createRadialGradient(cx-r*.3,cy-r*.3,r*.1,cx,cy,r);g.addColorStop(0,WOOD_LIGHT);g.addColorStop(.5,WOOD);g.addColorStop(1,WOOD_DARK);ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=WOOD_DARK;ctx.lineWidth=1.5;ctx.stroke();ctx.restore()}
+function drawAxle(ctx,cx,cy,r=5){ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=STEEL_DARK;ctx.fill();ctx.strokeStyle='#1c120a';ctx.lineWidth=1;ctx.stroke();ctx.beginPath();ctx.arc(cx-r*.3,cy-r*.3,r*.35,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,0.4)';ctx.fill();ctx.restore()}
+function drawGuideRail(ctx,x,y,w,h){ctx.save();ctx.strokeStyle='rgba(100,80,60,0.3)';ctx.lineWidth=1;ctx.setLineDash([4,4]);ctx.strokeRect(x,y,w,h);ctx.setLineDash([]);ctx.restore()}
+function drawGearShape(ctx,cx,cy,R,n,angle){ctx.save();ctx.translate(cx,cy);ctx.rotate(angle);const iR=R*.78,tH=R*.22;ctx.beginPath();for(let i=0;i<n;i++){const a1=(i/n)*Math.PI*2,a2=((i+.3)/n)*Math.PI*2,a3=((i+.7)/n)*Math.PI*2,a4=((i+1)/n)*Math.PI*2;if(i===0)ctx.moveTo(iR*Math.cos(a1),iR*Math.sin(a1));ctx.lineTo((R+tH*.3)*Math.cos(a2),(R+tH*.3)*Math.sin(a2));ctx.lineTo((R+tH*.3)*Math.cos(a3),(R+tH*.3)*Math.sin(a3));ctx.lineTo(iR*Math.cos(a4),iR*Math.sin(a4))}ctx.closePath();const g=ctx.createRadialGradient(0,0,5,0,0,R+tH);g.addColorStop(0,WOOD_LIGHT);g.addColorStop(.5,WOOD);g.addColorStop(1,WOOD_DARK);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=WOOD_DARK;ctx.lineWidth=1.2;ctx.stroke();ctx.beginPath();ctx.arc(0,0,R*.22,0,Math.PI*2);ctx.fillStyle=STEEL_COL;ctx.fill();ctx.restore()}
+function drawCamCircular(ctx,w,h,t,s){const cx=w/2,cy=h/2+20,R=32*s,off=12*s,fW=14*s,fH=55*s;drawGuideRail(ctx,cx-fW/2,20,fW,h*.72);drawWoodCircle(ctx,cx,cy,R);drawAxle(ctx,cx,cy,4*s);const ax=cx+off*Math.cos(t*.9),ay=cy+off*Math.sin(t*.9);ctx.save();ctx.beginPath();ctx.arc(ax,ay,4*s,0,Math.PI*2);ctx.fillStyle=ACCENT;ctx.fill();ctx.restore();const cY=cy-R-Math.abs(off*Math.sin(t*.9))-off*.5,fY=Math.max(20,cY-fH);drawWoodRect(ctx,cx-fW/2,fY,fW,fH,3)}
+function drawCamEccentrica(ctx,w,h,t,s){const cx=w/2,cy=h/2+15,rx=38*s,ry=22*s,off=14*s,fW=14*s,fH=50*s;drawGuideRail(ctx,cx-fW/2,22,fW,h*.68);ctx.save();ctx.translate(cx,cy);ctx.rotate(t*.8);const g=ctx.createRadialGradient(-rx*.3,-ry*.3,2,0,0,rx);g.addColorStop(0,WOOD_LIGHT);g.addColorStop(.5,WOOD);g.addColorStop(1,WOOD_DARK);ctx.beginPath();ctx.ellipse(0,off*.5,rx,ry,0,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=WOOD_DARK;ctx.lineWidth=1.5;ctx.stroke();ctx.restore();drawAxle(ctx,cx,cy,4*s);const tY=cy-ry-Math.abs(off*.5*Math.sin(t*.8))-ry*.3,fY=Math.max(22,tY-fH*.5);drawWoodRect(ctx,cx-fW/2,fY,fW,fH,3)}
+function drawCrankRod(ctx,w,h,t,s){const cx=w/2-30*s,cy=h*.55,cR=30*s,rL=90*s,pW=30*s,pH=20*s,cEX=cx+cR*Math.cos(t),cEY=cy+cR*Math.sin(t);drawGuideRail(ctx,cx+cR-10*s,cy-pH/2,140*s,pH);drawWoodCircle(ctx,cx,cy,14*s);drawAxle(ctx,cx,cy,4*s);ctx.save();ctx.strokeStyle=WOOD_DARK;ctx.lineWidth=7*s;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cEX,cEY);ctx.stroke();ctx.strokeStyle=WOOD;ctx.lineWidth=5*s;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cEX,cEY);ctx.stroke();ctx.restore();drawAxle(ctx,cEX,cEY,4*s);const pX=cEX+Math.sqrt(Math.max(0,rL*rL-(cEY-cy)*(cEY-cy)));ctx.save();ctx.strokeStyle=WOOD_DARK;ctx.lineWidth=5*s;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(cEX,cEY);ctx.lineTo(pX,cy);ctx.stroke();ctx.strokeStyle=WOOD_LIGHT;ctx.lineWidth=3*s;ctx.beginPath();ctx.moveTo(cEX,cEY);ctx.lineTo(pX,cy);ctx.stroke();ctx.restore();drawWoodRect(ctx,pX,cy-pH/2,pW,pH,3);drawAxle(ctx,pX+4,cy,3*s)}
+function drawRatchet(ctx,w,h,t,s){const cx=w/2,cy=h*.5+5,R=36*s,n=12;ctx.save();ctx.translate(cx,cy);ctx.rotate(Math.floor(t*.5)*((Math.PI*2)/n));ctx.beginPath();for(let i=0;i<n;i++){const a1=(i/n)*Math.PI*2,a2=((i+.7)/n)*Math.PI*2,a3=((i+1)/n)*Math.PI*2,iR=R*.72;if(i===0)ctx.moveTo(R*Math.cos(a1),R*Math.sin(a1));ctx.lineTo(R*Math.cos(a1),R*Math.sin(a1));ctx.lineTo(iR*Math.cos(a2),iR*Math.sin(a2));ctx.lineTo(R*Math.cos(a3),R*Math.sin(a3))}ctx.closePath();const g=ctx.createRadialGradient(0,0,5,0,0,R);g.addColorStop(0,WOOD_LIGHT);g.addColorStop(.6,WOOD);g.addColorStop(1,WOOD_DARK);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=WOOD_DARK;ctx.lineWidth=1.5;ctx.stroke();ctx.restore();drawAxle(ctx,cx,cy,5*s);const pPX=cx+R+8*s,pPY=cy-R*.3;ctx.save();ctx.translate(pPX,pPY);ctx.rotate(-.5+.2*Math.sin(t*.5));drawWoodRect(ctx,-5*s,-28*s,10*s,28*s,3);ctx.restore();drawAxle(ctx,pPX,pPY,3*s);ctx.save();ctx.strokeStyle=ACCENT;ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,R+12*s,-Math.PI*.8,Math.PI*.5,false);ctx.stroke();const hX=cx+(R+12*s)*Math.cos(Math.PI*.5),hY=cy+(R+12*s)*Math.sin(Math.PI*.5);ctx.fillStyle=ACCENT;ctx.beginPath();ctx.moveTo(hX,hY);ctx.lineTo(hX-6,hY-10);ctx.lineTo(hX+6,hY-10);ctx.closePath();ctx.fill();ctx.restore()}
+function drawGears(ctx,w,h,t,s){const r1=24*s,r2=44*s,n1=10,n2=20,d=(r1+r2)*1.02,cx1=w/2-d/2,cy=h/2+8;drawGearShape(ctx,cx1,cy,r1,n1,t);drawGearShape(ctx,cx1+d,cy,r2,n2,-t*(n1/n2)+Math.PI/n2);drawAxle(ctx,cx1,cy,4*s);drawAxle(ctx,cx1+d,cy,5*s);ctx.save();ctx.font=`bold ${9*s}px DM Mono`;ctx.fillStyle=ACCENT;ctx.fillText('2x',cx1-8*s,cy-r1-6*s);ctx.fillText('1x',cx1+d-8*s,cy-r2-6*s);ctx.restore()}
+function drawRackPinion(ctx,w,h,t,s){const cx=w/2,cy=h*.42,R=24*s,n=10,rW=170*s,rH=18*s,rOff=(t%(Math.PI*2))/(Math.PI*2)*(R*2*Math.PI)%(rW*.4)-rW*.1,rY=cy+R+2,rX=cx-rW/2-rOff;ctx.save();ctx.beginPath();ctx.rect(rX,rY,rW,rH);const g=ctx.createLinearGradient(rX,rY,rX,rY+rH);g.addColorStop(0,WOOD_LIGHT);g.addColorStop(.5,WOOD);g.addColorStop(1,WOOD_DARK);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=WOOD_DARK;ctx.lineWidth=1.2;ctx.stroke();const tS=(R*2*Math.PI)/n;for(let i=0;i<Math.ceil(rW/tS)+2;i++){const tx=rX+i*tS;ctx.beginPath();ctx.rect(tx,rY-7*s,tS*.5,7*s);ctx.fillStyle=WOOD_DARK;ctx.fill()}ctx.restore();drawGearShape(ctx,cx,cy,R,n,t);drawAxle(ctx,cx,cy,4*s)}
+function drawLever1(ctx,w,h,t,s){const pX=w/2,pY=h*.5+10,lL=170*s,lW=16*s,a=.22*Math.sin(t*.8);ctx.save();ctx.beginPath();ctx.moveTo(pX,pY+5*s);ctx.lineTo(pX-18*s,pY+28*s);ctx.lineTo(pX+18*s,pY+28*s);ctx.closePath();const g=ctx.createLinearGradient(pX-18*s,pY,pX,pY+28*s);g.addColorStop(0,WOOD_LIGHT);g.addColorStop(1,WOOD_DARK);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=WOOD_DARK;ctx.lineWidth=1.5;ctx.stroke();ctx.restore();ctx.save();ctx.translate(pX,pY);ctx.rotate(a);drawWoodRect(ctx,-lL/2,-lW/2,lL,lW,4);ctx.save();ctx.strokeStyle=ACCENT;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-lL*.62,-lW/2-22*s);ctx.lineTo(-lL*.62,-lW/2-4*s);ctx.stroke();ctx.beginPath();ctx.moveTo(-lL*.62-5*s,-lW/2-8*s);ctx.lineTo(-lL*.62,-lW/2-2*s);ctx.lineTo(-lL*.62+5*s,-lW/2-8*s);ctx.fillStyle=ACCENT;ctx.fill();ctx.restore();drawWoodRect(ctx,lL*.32,-lW/2-20*s,22*s,20*s,3);ctx.restore();drawAxle(ctx,pX,pY,4*s)}
+function drawLever2(ctx,w,h,t,s){const pX=w*.12,pY=h*.52,lL=180*s,lW=16*s,a=.18*Math.sin(t*.8);ctx.save();ctx.beginPath();ctx.moveTo(pX,pY+5*s);ctx.lineTo(pX-15*s,pY+25*s);ctx.lineTo(pX+15*s,pY+25*s);ctx.closePath();const g=ctx.createLinearGradient(0,pY,0,pY+25*s);g.addColorStop(0,WOOD_LIGHT);g.addColorStop(1,WOOD_DARK);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=WOOD_DARK;ctx.lineWidth=1.2;ctx.stroke();ctx.restore();ctx.save();ctx.translate(pX,pY);ctx.rotate(a);drawWoodRect(ctx,0,-lW/2,lL,lW,4);drawWoodRect(ctx,lL*.38-12*s,-lW/2-22*s,24*s,22*s,3);ctx.save();ctx.strokeStyle=ACCENT;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(lL-6*s,-lW/2-26*s);ctx.lineTo(lL-6*s,-lW/2-4*s);ctx.stroke();ctx.beginPath();ctx.moveTo(lL-11*s,-lW/2-8*s);ctx.lineTo(lL-6*s,-lW/2-2*s);ctx.lineTo(lL-1*s,-lW/2-8*s);ctx.fillStyle=ACCENT;ctx.fill();ctx.restore();ctx.restore();drawAxle(ctx,pX,pY,4*s)}
+function drawHeartCam(ctx,w,h,t,s){const cx=w/2,cy=h*.55,R=34*s;ctx.save();ctx.translate(cx,cy);ctx.rotate(t*.7);ctx.beginPath();ctx.moveTo(0,-R*.9);ctx.bezierCurveTo(R*.8,-R*1.1,R*1.2,-R*.3,0,R*.6);ctx.bezierCurveTo(-R*1.2,-R*.3,-R*.8,-R*1.1,0,-R*.9);ctx.closePath();const g=ctx.createRadialGradient(0,0,4,0,0,R);g.addColorStop(0,WOOD_LIGHT);g.addColorStop(.5,WOOD);g.addColorStop(1,WOOD_DARK);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=WOOD_DARK;ctx.lineWidth=1.5;ctx.stroke();ctx.restore();drawAxle(ctx,cx,cy,4*s);const fW=14*s,fH=55*s;drawGuideRail(ctx,cx-fW/2,15,fW,h*.7);const hR=R*(.85+.18*Math.sin(t*.7*2)),fY=Math.max(15,cy-hR-fH*.6);drawWoodRect(ctx,cx-fW/2,fY,fW,fH,3)}
+function drawEccentricShaft(ctx,w,h,t,s){const sY=h*.5,sX1=20*s,sX2=w-20*s,ecc=18*s;ctx.save();ctx.strokeStyle=STEEL_DARK;ctx.lineWidth=7*s;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(sX1,sY);ctx.lineTo(sX2,sY);ctx.stroke();ctx.strokeStyle=STEEL_COL;ctx.lineWidth=5*s;ctx.beginPath();ctx.moveTo(sX1,sY);ctx.lineTo(sX2,sY);ctx.stroke();ctx.restore();const d1x=w*.32,d1cx=d1x+ecc*Math.cos(t),d1cy=sY+ecc*Math.sin(t);drawWoodCircle(ctx,d1cx,d1cy,28*s);drawAxle(ctx,d1x,sY,4*s);const d2x=w*.67,d2cx=d2x+ecc*Math.cos(t+Math.PI*.6),d2cy=sY+ecc*Math.sin(t+Math.PI*.6);drawWoodCircle(ctx,d2cx,d2cy,28*s);drawAxle(ctx,d2x,sY,4*s);ctx.save();ctx.strokeStyle=WOOD_DARK;ctx.lineWidth=4*s;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(d1cx,d1cy+28*s);ctx.lineTo(d1cx,d1cy+28*s+30*s);ctx.stroke();ctx.beginPath();ctx.moveTo(d2cx,d2cy+28*s);ctx.lineTo(d2cx,d2cy+28*s+30*s);ctx.stroke();ctx.restore()}
+function drawRockerCrank(ctx,w,h,t,s){const cCx=w*.28,cCy=h*.52,cR=28*s,rPX=w*.72,rPY=h*.52,rL=70*s,rodL=100*s,cEX=cCx+cR*Math.cos(t),cEY=cCy+cR*Math.sin(t),dx=cEX-rPX,dy=cEY-rPY,dist=Math.sqrt(dx*dx+dy*dy);let rA=Math.atan2(dy,dx)+Math.acos(Math.min(1,(dist*dist+rL*rL-rodL*rodL)/(2*dist*rL)));const rEX=rPX+rL*Math.cos(rA),rEY=rPY+rL*Math.sin(rA);ctx.save();ctx.strokeStyle='rgba(120,90,60,0.3)';ctx.lineWidth=2;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(cCx,cCy);ctx.lineTo(rPX,rPY);ctx.stroke();ctx.setLineDash([]);ctx.restore();drawWoodCircle(ctx,cCx,cCy,10*s);ctx.save();ctx.strokeStyle=WOOD_DARK;ctx.lineWidth=6*s;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(cCx,cCy);ctx.lineTo(cEX,cEY);ctx.stroke();ctx.strokeStyle=WOOD;ctx.lineWidth=4*s;ctx.beginPath();ctx.moveTo(cCx,cCy);ctx.lineTo(cEX,cEY);ctx.stroke();ctx.restore();drawAxle(ctx,cCx,cCy,5*s);drawAxle(ctx,cEX,cEY,3*s);ctx.save();ctx.strokeStyle=WOOD_DARK;ctx.lineWidth=5*s;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(cEX,cEY);ctx.lineTo(rEX,rEY);ctx.stroke();ctx.strokeStyle=WOOD_LIGHT;ctx.lineWidth=3*s;ctx.beginPath();ctx.moveTo(cEX,cEY);ctx.lineTo(rEX,rEY);ctx.stroke();ctx.restore();ctx.save();ctx.strokeStyle=WOOD_DARK;ctx.lineWidth=7*s;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(rPX,rPY);ctx.lineTo(rEX,rEY);ctx.stroke();ctx.strokeStyle=WOOD;ctx.lineWidth=5*s;ctx.beginPath();ctx.moveTo(rPX,rPY);ctx.lineTo(rEX,rEY);ctx.stroke();ctx.restore();drawAxle(ctx,rPX,rPY,5*s);drawAxle(ctx,rEX,rEY,3*s)}
+function drawBalanceMech(ctx,w,h,t,s){const pX=w/2,pY=h*.38,aL=80*s,aW=14*s,cCx=w/2,cCy=pY+55*s,cR=24*s,ecc=14*s,ctX=cCx+ecc*Math.cos(t*.9),ctY=cCy+ecc*Math.sin(t*.9);drawWoodCircle(ctx,cCx,cCy,cR);drawAxle(ctx,cCx,cCy,4*s);ctx.save();ctx.beginPath();ctx.arc(ctX,ctY,3*s,0,Math.PI*2);ctx.fillStyle=ACCENT;ctx.fill();ctx.restore();const aA=.35*Math.sin(t*.9);ctx.save();ctx.strokeStyle='rgba(120,90,60,0.35)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(pX,pY+5*s);ctx.lineTo(pX,pY+42*s);ctx.stroke();ctx.restore();ctx.save();ctx.translate(pX,pY);ctx.rotate(aA);drawWoodRect(ctx,-aL,-aW/2,aL*2,aW,5);ctx.save();ctx.beginPath();ctx.arc(-aL+5*s,0,10*s,0,Math.PI*2);ctx.fillStyle=WOOD_DARK;ctx.fill();ctx.restore();ctx.save();ctx.beginPath();ctx.arc(aL-5*s,0,10*s,0,Math.PI*2);ctx.fillStyle=WOOD_DARK;ctx.fill();ctx.restore();ctx.restore();ctx.save();ctx.strokeStyle=STEEL_COL;ctx.lineWidth=3*s;ctx.setLineDash([4,3]);const cTop=cCy-cR-Math.abs(ecc*Math.sin(t*.9));ctx.beginPath();ctx.moveTo(cCx,cTop);ctx.lineTo(pX,pY+3*s);ctx.stroke();ctx.setLineDash([]);ctx.restore();drawAxle(ctx,pX,pY,4*s)}
 
-// ══════════════════════════════════════════════════════
-// DRAWING FUNCTIONS — each gets (ctx, w, h, t, scale)
-// ══════════════════════════════════════════════════════
-
-const WOOD = '#c4894e';
-const WOOD_DARK = '#7a4f2d';
-const WOOD_LIGHT = '#e8c99a';
-const STEEL_COL = '#8a9ba8';
-const STEEL_DARK = '#3a4a54';
-const ACCENT = '#c0392b';
-const GUIDE = 'rgba(100,80,60,0.15)';
-
-function drawWoodRect(ctx, x, y, w, h, radius=5) {
-  ctx.save();
-  ctx.beginPath();
-  ctx.roundRect(x, y, w, h, radius);
-  const grad = ctx.createLinearGradient(x, y, x+w, y+h);
-  grad.addColorStop(0, WOOD_LIGHT);
-  grad.addColorStop(0.4, WOOD);
-  grad.addColorStop(1, WOOD_DARK);
-  ctx.fillStyle = grad;
-  ctx.fill();
-  ctx.strokeStyle = WOOD_DARK;
-  ctx.lineWidth = 1.2;
-  ctx.stroke();
-  ctx.restore();
-}
-
-function drawWoodCircle(ctx, cx, cy, r) {
-  ctx.save();
-  const grad = ctx.createRadialGradient(cx-r*0.3, cy-r*0.3, r*0.1, cx, cy, r);
-  grad.addColorStop(0, WOOD_LIGHT);
-  grad.addColorStop(0.5, WOOD);
-  grad.addColorStop(1, WOOD_DARK);
-  ctx.beginPath();
-  ctx.arc(cx, cy, r, 0, Math.PI*2);
-  ctx.fillStyle = grad;
-  ctx.fill();
-  ctx.strokeStyle = WOOD_DARK;
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-  ctx.restore();
-}
-
-function drawAxle(ctx, cx, cy, r=5) {
-  ctx.save();
-  ctx.beginPath();
-  ctx.arc(cx, cy, r, 0, Math.PI*2);
-  ctx.fillStyle = STEEL_DARK;
-  ctx.fill();
-  ctx.strokeStyle = '#1c120a';
-  ctx.lineWidth = 1;
-  ctx.stroke();
-  // highlight
-  ctx.beginPath();
-  ctx.arc(cx-r*0.3, cy-r*0.3, r*0.35, 0, Math.PI*2);
-  ctx.fillStyle = 'rgba(255,255,255,0.4)';
-  ctx.fill();
-  ctx.restore();
-}
-
-function drawGuideRail(ctx, x, y, w, h) {
-  ctx.save();
-  ctx.strokeStyle = 'rgba(100,80,60,0.3)';
-  ctx.lineWidth = 1;
-  ctx.setLineDash([4,4]);
-  ctx.strokeRect(x, y, w, h);
-  ctx.setLineDash([]);
-  ctx.restore();
-}
-
-// ── 1. Leva Circular ──
-function drawCamCircular(ctx, w, h, t, scale) {
-  const cx = w/2, cy = h/2 + 20;
-  const R = 32*scale;
-  const offset = 12*scale;
-  const followerW = 14*scale, followerH = 55*scale;
-  // guide
-  const guideX = cx - followerW/2;
-  const guideTop = 20;
-  drawGuideRail(ctx, guideX, guideTop, followerW, h*0.72);
-  // cam pivot
-  const camCx = cx, camCy = cy;
-  // cam position: eje descentrado
-  const ax = camCx + offset*Math.cos(t*0.9);
-  const ay = camCy + offset*Math.sin(t*0.9);
-  drawWoodCircle(ctx, camCx, camCy, R);
-  drawAxle(ctx, camCx, camCy, 4*scale);
-  // mark edge
-  ctx.save(); ctx.beginPath(); ctx.arc(camCx,camCy,R,0,Math.PI*2);
-  ctx.strokeStyle='rgba(255,255,255,0.18)'; ctx.lineWidth=2; ctx.stroke(); ctx.restore();
-  // show eccentric dot
-  ctx.save(); ctx.beginPath(); ctx.arc(ax,ay,4*scale,0,Math.PI*2);
-  ctx.fillStyle=ACCENT; ctx.fill(); ctx.restore();
-  // follower
-  const topOfCam = camCy - R - offset - (R+offset)*0.08;
-  const contactY = camCy - R - Math.abs(offset*Math.sin(t*0.9)) - offset*0.5;
-  const followerY = Math.max(guideTop, contactY - followerH);
-  drawWoodRect(ctx, cx - followerW/2, followerY, followerW, followerH, 3);
-  // arrow showing movement
-  ctx.save();
-  ctx.strokeStyle = ACCENT; ctx.lineWidth=1.5; ctx.setLineDash([3,3]);
-  ctx.beginPath(); ctx.moveTo(cx + followerW/2+8, guideTop+8); ctx.lineTo(cx + followerW/2+8, guideTop+followerH);
-  ctx.stroke(); ctx.setLineDash([]);
-  ctx.fillStyle=ACCENT; ctx.font=`${10*scale}px DM Mono`;
-  ctx.fillText('↕', cx + followerW/2+4, guideTop+followerH/2+4);
-  ctx.restore();
-}
-
-// ── 2. Leva Excéntrica ──
-function drawCamEccentrica(ctx, w, h, t, scale) {
-  const cx = w/2, cy = h/2 + 15;
-  const rx = 38*scale, ry = 22*scale;
-  const offset = 14*scale;
-  const followerW = 14*scale, followerH = 50*scale;
-  const guideX = cx - followerW/2;
-  drawGuideRail(ctx, guideX, 22, followerW, h*0.68);
-  // draw oval cam
-  ctx.save();
-  ctx.translate(cx, cy);
-  ctx.rotate(t*0.8);
-  const grad = ctx.createRadialGradient(-rx*0.3,-ry*0.3,2, 0,0,rx);
-  grad.addColorStop(0, WOOD_LIGHT); grad.addColorStop(0.5,WOOD); grad.addColorStop(1,WOOD_DARK);
-  ctx.beginPath();
-  ctx.ellipse(0, offset*0.5, rx, ry, 0, 0, Math.PI*2);
-  ctx.fillStyle = grad; ctx.fill();
-  ctx.strokeStyle=WOOD_DARK; ctx.lineWidth=1.5; ctx.stroke();
-  ctx.restore();
-  drawAxle(ctx, cx, cy, 4*scale);
-  // follower — top of ellipse (approx)
-  const topY = cy - ry - Math.abs(offset*0.5*Math.sin(t*0.8)) - ry*0.3;
-  const followerY = Math.max(22, topY - followerH*0.5);
-  drawWoodRect(ctx, cx - followerW/2, followerY, followerW, followerH, 3);
-}
-
-// ── 3. Manivela y Biela ──
-function drawCrankRod(ctx, w, h, t, scale) {
-  const cx = w/2 - 30*scale, cy = h*0.55;
-  const crankR = 30*scale;
-  const rodLen = 90*scale;
-  const pistonW = 30*scale, pistonH = 20*scale;
-  const angle = t;
-  const crankEndX = cx + crankR*Math.cos(angle);
-  const crankEndY = cy + crankR*Math.sin(angle);
-  // piston guide
-  const guideY = cy - pistonH/2;
-  const guideLen = 140*scale;
-  drawGuideRail(ctx, cx+crankR-10*scale, guideY, guideLen, pistonH);
-  // crank circle base
-  drawWoodCircle(ctx, cx, cy, 14*scale);
-  drawAxle(ctx, cx, cy, 4*scale);
-  // crank arm
-  ctx.save();
-  ctx.strokeStyle = WOOD_DARK; ctx.lineWidth = 7*scale; ctx.lineCap='round';
-  ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(crankEndX, crankEndY); ctx.stroke();
-  ctx.strokeStyle = WOOD; ctx.lineWidth = 5*scale;
-  ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(crankEndX, crankEndY); ctx.stroke();
-  ctx.restore();
-  drawAxle(ctx, crankEndX, crankEndY, 4*scale);
-  // compute piston X
-  const pistonX = crankEndX + Math.sqrt(Math.max(0, rodLen*rodLen - (crankEndY-cy)*(crankEndY-cy)));
-  // rod
-  ctx.save();
-  ctx.strokeStyle = WOOD_DARK; ctx.lineWidth = 5*scale; ctx.lineCap='round';
-  ctx.beginPath(); ctx.moveTo(crankEndX, crankEndY); ctx.lineTo(pistonX, cy); ctx.stroke();
-  ctx.strokeStyle = WOOD_LIGHT; ctx.lineWidth = 3*scale;
-  ctx.beginPath(); ctx.moveTo(crankEndX, crankEndY); ctx.lineTo(pistonX, cy); ctx.stroke();
-  ctx.restore();
-  // piston
-  drawWoodRect(ctx, pistonX, cy - pistonH/2, pistonW, pistonH, 3);
-  drawAxle(ctx, pistonX+4, cy, 3*scale);
-}
-
-// ── 4. Trinquete ──
-function drawRatchet(ctx, w, h, t, scale) {
-  const cx = w/2, cy = h*0.5 + 5;
-  const R = 36*scale, nTeeth = 12;
-  // draw ratchet wheel
-  ctx.save();
-  ctx.translate(cx, cy);
-  ctx.rotate(Math.floor(t*0.5)*((Math.PI*2)/nTeeth)); // step-by-step
-  ctx.beginPath();
-  for(let i=0;i<nTeeth;i++) {
-    const a1 = (i/nTeeth)*Math.PI*2;
-    const a2 = ((i+0.7)/nTeeth)*Math.PI*2;
-    const a3 = ((i+1)/nTeeth)*Math.PI*2;
-    const innerR = R*0.72;
-    if(i===0) ctx.moveTo(R*Math.cos(a1), R*Math.sin(a1));
-    ctx.lineTo(R*Math.cos(a1), R*Math.sin(a1));
-    ctx.lineTo(innerR*Math.cos(a2), innerR*Math.sin(a2));
-    ctx.lineTo(R*Math.cos(a3), R*Math.sin(a3));
-  }
-  ctx.closePath();
-  const grad = ctx.createRadialGradient(0,0,5,0,0,R);
-  grad.addColorStop(0, WOOD_LIGHT); grad.addColorStop(0.6,WOOD); grad.addColorStop(1,WOOD_DARK);
-  ctx.fillStyle = grad; ctx.fill();
-  ctx.strokeStyle = WOOD_DARK; ctx.lineWidth = 1.5; ctx.stroke();
-  ctx.restore();
-  drawAxle(ctx, cx, cy, 5*scale);
-  // pawl
-  const pawlPivotX = cx + R + 8*scale, pawlPivotY = cy - R*0.3;
-  const pawlAngle = -0.5 + 0.2*Math.sin(t*0.5);
-  ctx.save();
-  ctx.translate(pawlPivotX, pawlPivotY);
-  ctx.rotate(pawlAngle);
-  drawWoodRect(ctx, -5*scale, -28*scale, 10*scale, 28*scale, 3);
-  ctx.restore();
-  drawAxle(ctx, pawlPivotX, pawlPivotY, 3*scale);
-  // direction arrow
-  ctx.save();
-  ctx.strokeStyle=ACCENT; ctx.lineWidth=2;
-  ctx.beginPath();
-  ctx.arc(cx, cy, R+12*scale, -Math.PI*0.8, Math.PI*0.5, false);
-  ctx.stroke();
-  const headX = cx + (R+12*scale)*Math.cos(Math.PI*0.5);
-  const headY = cy + (R+12*scale)*Math.sin(Math.PI*0.5);
-  ctx.fillStyle=ACCENT; ctx.beginPath();
-  ctx.moveTo(headX, headY); ctx.lineTo(headX-6,headY-10); ctx.lineTo(headX+6,headY-10);
-  ctx.closePath(); ctx.fill();
-  ctx.restore();
-}
-
-// ── 5. Engranajes ──
-function drawGearShape(ctx, cx, cy, R, nTeeth, angle) {
-  ctx.save();
-  ctx.translate(cx, cy);
-  ctx.rotate(angle);
-  const innerR = R*0.78, toothH = R*0.22;
-  ctx.beginPath();
-  for(let i=0;i<nTeeth;i++) {
-    const a1 = (i/nTeeth)*Math.PI*2;
-    const a2 = ((i+0.3)/nTeeth)*Math.PI*2;
-    const a3 = ((i+0.7)/nTeeth)*Math.PI*2;
-    const a4 = ((i+1)/nTeeth)*Math.PI*2;
-    if(i===0) ctx.moveTo(innerR*Math.cos(a1), innerR*Math.sin(a1));
-    ctx.lineTo((R+toothH*0.3)*Math.cos(a2), (R+toothH*0.3)*Math.sin(a2));
-    ctx.lineTo((R+toothH*0.3)*Math.cos(a3), (R+toothH*0.3)*Math.sin(a3));
-    ctx.lineTo(innerR*Math.cos(a4), innerR*Math.sin(a4));
-  }
-  ctx.closePath();
-  const grad = ctx.createRadialGradient(0,0,5,0,0,R+toothH);
-  grad.addColorStop(0, WOOD_LIGHT); grad.addColorStop(0.5,WOOD); grad.addColorStop(1,WOOD_DARK);
-  ctx.fillStyle = grad; ctx.fill();
-  ctx.strokeStyle = WOOD_DARK; ctx.lineWidth = 1.2; ctx.stroke();
-  // hub
-  ctx.beginPath(); ctx.arc(0,0,R*0.22,0,Math.PI*2);
-  ctx.fillStyle=STEEL_COL; ctx.fill();
-  ctx.restore();
-}
-
-function drawGears(ctx, w, h, t, scale) {
-  const r1 = 24*scale, r2 = 44*scale;
-  const n1 = 10, n2 = 20;
-  const dist = (r1+r2)*1.02;
-  const cx1 = w/2 - dist/2, cy = h/2+8;
-  const cx2 = cx1 + dist;
-  const ratio = n1/n2;
-  drawGearShape(ctx, cx1, cy, r1, n1, t);
-  drawGearShape(ctx, cx2, cy, r2, n2, -t*ratio + Math.PI/n2);
-  drawAxle(ctx, cx1, cy, 4*scale);
-  drawAxle(ctx, cx2, cy, 5*scale);
-  // speed labels
-  ctx.save();
-  ctx.font = `bold ${9*scale}px DM Mono`;
-  ctx.fillStyle = ACCENT;
-  ctx.fillText('2×', cx1-8*scale, cy - r1 - 6*scale);
-  ctx.fillText('1×', cx2-8*scale, cy - r2 - 6*scale);
-  ctx.restore();
-}
-
-// ── 6. Cremallera y Piñón ──
-function drawRackPinion(ctx, w, h, t, scale) {
-  const cx = w/2, cy = h*0.42;
-  const R = 24*scale, nTeeth = 10;
-  const rackW = 170*scale, rackH = 18*scale;
-  // rack offset based on t
-  const rackOffsetX = (t%(Math.PI*2)) / (Math.PI*2) * (R*2*Math.PI) % (rackW*0.4) - rackW*0.1;
-  const rackY = cy + R + 2;
-  // rack
-  ctx.save();
-  const rackX = cx - rackW/2 - rackOffsetX;
-  ctx.beginPath();
-  ctx.rect(rackX, rackY, rackW, rackH);
-  const rg = ctx.createLinearGradient(rackX,rackY,rackX,rackY+rackH);
-  rg.addColorStop(0,WOOD_LIGHT); rg.addColorStop(0.5,WOOD); rg.addColorStop(1,WOOD_DARK);
-  ctx.fillStyle=rg; ctx.fill();
-  ctx.strokeStyle=WOOD_DARK; ctx.lineWidth=1.2; ctx.stroke();
-  // rack teeth
-  const toothStep = (R*2*Math.PI)/nTeeth;
-  for(let i=0;i<Math.ceil(rackW/toothStep)+2;i++) {
-    const tx = rackX + i*toothStep;
-    ctx.beginPath();
-    ctx.rect(tx, rackY-7*scale, toothStep*0.5, 7*scale);
-    ctx.fillStyle=WOOD_DARK; ctx.fill();
-    ctx.strokeStyle='rgba(0,0,0,0.3)'; ctx.lineWidth=0.8; ctx.stroke();
-  }
-  ctx.restore();
-  // pinion
-  drawGearShape(ctx, cx, cy, R, nTeeth, t);
-  drawAxle(ctx, cx, cy, 4*scale);
-}
-
-// ── 7. Palanca 1er grado ──
-function drawLever1(ctx, w, h, t, scale) {
-  const pivotX = w/2, pivotY = h*0.5+10;
-  const leverLen = 170*scale;
-  const angle = 0.22*Math.sin(t*0.8);
-  const leverW = 16*scale;
-  // fulcrum triangle
-  ctx.save();
-  ctx.beginPath();
-  ctx.moveTo(pivotX, pivotY+5*scale);
-  ctx.lineTo(pivotX-18*scale, pivotY+28*scale);
-  ctx.lineTo(pivotX+18*scale, pivotY+28*scale);
-  ctx.closePath();
-  const tg = ctx.createLinearGradient(pivotX-18*scale,pivotY,pivotX,pivotY+28*scale);
-  tg.addColorStop(0,WOOD_LIGHT); tg.addColorStop(1,WOOD_DARK);
-  ctx.fillStyle=tg; ctx.fill();
-  ctx.strokeStyle=WOOD_DARK; ctx.lineWidth=1.5; ctx.stroke();
-  ctx.restore();
-  // base line
-  ctx.save();
-  ctx.strokeStyle='rgba(120,90,60,0.3)'; ctx.lineWidth=2;
-  ctx.beginPath(); ctx.moveTo(w*0.1, pivotY+28*scale); ctx.lineTo(w*0.9, pivotY+28*scale);
-  ctx.stroke(); ctx.restore();
-  // lever bar
-  ctx.save();
-  ctx.translate(pivotX, pivotY);
-  ctx.rotate(angle);
-  drawWoodRect(ctx, -leverLen/2, -leverW/2, leverLen, leverW, 4);
-  // force arrow (left side)
-  ctx.save();
-  ctx.strokeStyle=ACCENT; ctx.lineWidth=2;
-  ctx.beginPath();
-  ctx.moveTo(-leverLen*0.62, -leverW/2-22*scale);
-  ctx.lineTo(-leverLen*0.62, -leverW/2-4*scale);
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(-leverLen*0.62-5*scale, -leverW/2-8*scale);
-  ctx.lineTo(-leverLen*0.62, -leverW/2-2*scale);
-  ctx.lineTo(-leverLen*0.62+5*scale, -leverW/2-8*scale);
-  ctx.fillStyle=ACCENT; ctx.fill();
-  ctx.restore();
-  // load (right)
-  drawWoodRect(ctx, leverLen*0.32, -leverW/2-20*scale, 22*scale, 20*scale, 3);
-  ctx.restore();
-  drawAxle(ctx, pivotX, pivotY, 4*scale);
-  // labels
-  ctx.save();
-  ctx.font=`${9*scale}px DM Mono`; ctx.fillStyle=WOOD_MID;
-  ctx.fillText('F', w*0.18, pivotY-28*scale);
-  ctx.fillText('Carga', w*0.62, pivotY-22*scale);
-  ctx.fillText('↑ Punto de apoyo', pivotX - 42*scale, pivotY+46*scale);
-  ctx.restore();
-}
-const WOOD_MID = '#7a4f2d';
-
-// ── 8. Palanca 2do grado ──
-function drawLever2(ctx, w, h, t, scale) {
-  const pivotX = w*0.12, pivotY = h*0.52;
-  const leverLen = 180*scale;
-  const angle = 0.18*Math.sin(t*0.8);
-  const leverW = 16*scale;
-  // fulcrum at left
-  ctx.save();
-  ctx.beginPath();
-  ctx.moveTo(pivotX, pivotY+5*scale);
-  ctx.lineTo(pivotX-15*scale, pivotY+25*scale);
-  ctx.lineTo(pivotX+15*scale, pivotY+25*scale);
-  ctx.closePath();
-  const tg = ctx.createLinearGradient(0,pivotY,0,pivotY+25*scale);
-  tg.addColorStop(0,WOOD_LIGHT); tg.addColorStop(1,WOOD_DARK);
-  ctx.fillStyle=tg; ctx.fill();
-  ctx.strokeStyle=WOOD_DARK; ctx.lineWidth=1.2; ctx.stroke();
-  ctx.restore();
-  // lever
-  ctx.save();
-  ctx.translate(pivotX, pivotY);
-  ctx.rotate(angle);
-  drawWoodRect(ctx, 0, -leverW/2, leverLen, leverW, 4);
-  // load block in the middle
-  const loadX = leverLen*0.38;
-  drawWoodRect(ctx, loadX-12*scale, -leverW/2-22*scale, 24*scale, 22*scale, 3);
-  // force arrow at end
-  ctx.save();
-  ctx.strokeStyle=ACCENT; ctx.lineWidth=2;
-  ctx.beginPath();
-  ctx.moveTo(leverLen-6*scale, -leverW/2-26*scale);
-  ctx.lineTo(leverLen-6*scale, -leverW/2-4*scale);
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(leverLen-11*scale, -leverW/2-8*scale);
-  ctx.lineTo(leverLen-6*scale, -leverW/2-2*scale);
-  ctx.lineTo(leverLen-1*scale, -leverW/2-8*scale);
-  ctx.fillStyle=ACCENT; ctx.fill();
-  ctx.restore();
-  ctx.restore();
-  drawAxle(ctx, pivotX, pivotY, 4*scale);
-  ctx.save();
-  ctx.font=`${9*scale}px DM Mono`; ctx.fillStyle=WOOD_MID;
-  ctx.fillText('Apoyo', pivotX-8*scale, pivotY+40*scale);
-  ctx.fillText('Carga', pivotX+leverLen*0.32, pivotY-34*scale);
-  ctx.fillText('F ↑', pivotX+leverLen-10*scale, pivotY-34*scale);
-  ctx.restore();
-}
-
-// ── 9. Leva de Corazón ──
-function drawHeartCam(ctx, w, h, t, scale) {
-  const cx = w/2, cy = h*0.55;
-  const R = 34*scale;
-  // draw heart-shaped cam
-  ctx.save();
-  ctx.translate(cx, cy);
-  ctx.rotate(t*0.7);
-  ctx.beginPath();
-  // approximate heart with beziers
-  const s = R*0.032;
-  ctx.moveTo(0, -R*0.9);
-  ctx.bezierCurveTo(R*0.8,-R*1.1, R*1.2,-R*0.3, 0, R*0.6);
-  ctx.bezierCurveTo(-R*1.2,-R*0.3, -R*0.8,-R*1.1, 0,-R*0.9);
-  ctx.closePath();
-  const hg = ctx.createRadialGradient(0,0,4,0,0,R);
-  hg.addColorStop(0,WOOD_LIGHT); hg.addColorStop(0.5,WOOD); hg.addColorStop(1,WOOD_DARK);
-  ctx.fillStyle=hg; ctx.fill();
-  ctx.strokeStyle=WOOD_DARK; ctx.lineWidth=1.5; ctx.stroke();
-  ctx.restore();
-  drawAxle(ctx, cx, cy, 4*scale);
-  // follower — approximate contact
-  const followerW = 14*scale, followerH = 55*scale;
-  const guideX = cx - followerW/2;
-  drawGuideRail(ctx, guideX, 15, followerW, h*0.7);
-  // heart radius at top angle varies smoothly
-  const heartR = R*(0.85 + 0.18*Math.sin(t*0.7*2));
-  const followerY = Math.max(15, cy - heartR - followerH*0.6);
-  drawWoodRect(ctx, cx - followerW/2, followerY, followerW, followerH, 3);
-}
-
-// ── 10. Eje y Excéntrica ──
-function drawEccentricShaft(ctx, w, h, t, scale) {
-  const shaftY = h*0.5;
-  const shaftX1 = 20*scale, shaftX2 = w - 20*scale;
-  // shaft
-  ctx.save();
-  ctx.strokeStyle=STEEL_DARK; ctx.lineWidth=7*scale; ctx.lineCap='round';
-  ctx.beginPath(); ctx.moveTo(shaftX1, shaftY); ctx.lineTo(shaftX2, shaftY); ctx.stroke();
-  ctx.strokeStyle=STEEL_COL; ctx.lineWidth=5*scale;
-  ctx.beginPath(); ctx.moveTo(shaftX1, shaftY); ctx.lineTo(shaftX2, shaftY); ctx.stroke();
-  ctx.restore();
-  // disc 1
-  const d1x = w*0.32, ecc = 18*scale;
-  const d1cx = d1x + ecc*Math.cos(t), d1cy = shaftY + ecc*Math.sin(t);
-  drawWoodCircle(ctx, d1cx, d1cy, 28*scale);
-  drawAxle(ctx, d1x, shaftY, 4*scale);
-  // disc 2 (offset by PI/2)
-  const d2x = w*0.67;
-  const d2cx = d2x + ecc*Math.cos(t+Math.PI*0.6), d2cy = shaftY + ecc*Math.sin(t+Math.PI*0.6);
-  drawWoodCircle(ctx, d2cx, d2cy, 28*scale);
-  drawAxle(ctx, d2x, shaftY, 4*scale);
-  // connecting rods downward
-  ctx.save(); ctx.strokeStyle=WOOD_DARK; ctx.lineWidth=4*scale; ctx.lineCap='round';
-  ctx.beginPath(); ctx.moveTo(d1cx, d1cy+28*scale); ctx.lineTo(d1cx, d1cy+28*scale+30*scale); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(d2cx, d2cy+28*scale); ctx.lineTo(d2cx, d2cy+28*scale+30*scale); ctx.stroke();
-  ctx.restore();
-  // label
-  ctx.save();
-  ctx.font=`${9*scale}px DM Mono`; ctx.fillStyle=WOOD_MID;
-  ctx.fillText('90° desfase', w/2-22*scale, shaftY+75*scale);
-  ctx.restore();
-}
-
-// ── 11. Mecanismo de Vaivén ──
-function drawRockerCrank(ctx, w, h, t, scale) {
-  const crankCx = w*0.28, crankCy = h*0.52;
-  const crankR = 28*scale;
-  const rockerPivotX = w*0.72, rockerPivotY = h*0.52;
-  const rockerLen = 70*scale;
-  const rodLen = 100*scale;
-  const crankEndX = crankCx + crankR*Math.cos(t);
-  const crankEndY = crankCy + crankR*Math.sin(t);
-  // find rocker angle
-  const dx = crankEndX - rockerPivotX, dy = crankEndY - rockerPivotY;
-  const dist = Math.sqrt(dx*dx+dy*dy);
-  let rockerAngle = Math.atan2(dy,dx) + Math.acos(Math.min(1, (dist*dist + rockerLen*rockerLen - rodLen*rodLen)/(2*dist*rockerLen)));
-  const rockerEndX = rockerPivotX + rockerLen*Math.cos(rockerAngle);
-  const rockerEndY = rockerPivotY + rockerLen*Math.sin(rockerAngle);
-  // draw base line
-  ctx.save();
-  ctx.strokeStyle='rgba(120,90,60,0.3)'; ctx.lineWidth=2; ctx.setLineDash([4,3]);
-  ctx.beginPath(); ctx.moveTo(crankCx, crankCy); ctx.lineTo(rockerPivotX, rockerPivotY); ctx.stroke();
-  ctx.setLineDash([]); ctx.restore();
-  // crank
-  drawWoodCircle(ctx, crankCx, crankCy, 10*scale);
-  ctx.save(); ctx.strokeStyle=WOOD_DARK; ctx.lineWidth=6*scale; ctx.lineCap='round';
-  ctx.beginPath(); ctx.moveTo(crankCx,crankCy); ctx.lineTo(crankEndX,crankEndY); ctx.stroke();
-  ctx.strokeStyle=WOOD; ctx.lineWidth=4*scale;
-  ctx.beginPath(); ctx.moveTo(crankCx,crankCy); ctx.lineTo(crankEndX,crankEndY); ctx.stroke();
-  ctx.restore();
-  drawAxle(ctx, crankCx, crankCy, 5*scale);
-  drawAxle(ctx, crankEndX, crankEndY, 3*scale);
-  // rod
-  ctx.save(); ctx.strokeStyle=WOOD_DARK; ctx.lineWidth=5*scale; ctx.lineCap='round';
-  ctx.beginPath(); ctx.moveTo(crankEndX,crankEndY); ctx.lineTo(rockerEndX,rockerEndY); ctx.stroke();
-  ctx.strokeStyle=WOOD_LIGHT; ctx.lineWidth=3*scale;
-  ctx.beginPath(); ctx.moveTo(crankEndX,crankEndY); ctx.lineTo(rockerEndX,rockerEndY); ctx.stroke();
-  ctx.restore();
-  // rocker
-  ctx.save(); ctx.strokeStyle=WOOD_DARK; ctx.lineWidth=7*scale; ctx.lineCap='round';
-  ctx.beginPath(); ctx.moveTo(rockerPivotX,rockerPivotY); ctx.lineTo(rockerEndX,rockerEndY); ctx.stroke();
-  ctx.strokeStyle=WOOD; ctx.lineWidth=5*scale;
-  ctx.beginPath(); ctx.moveTo(rockerPivotX,rockerPivotY); ctx.lineTo(rockerEndX,rockerEndY); ctx.stroke();
-  ctx.restore();
-  drawAxle(ctx, rockerPivotX, rockerPivotY, 5*scale);
-  drawAxle(ctx, rockerEndX, rockerEndY, 3*scale);
-}
-
-// ── 12. Mecanismo de Balanceo ──
-function drawBalanceMech(ctx, w, h, t, scale) {
-  const pivotX = w/2, pivotY = h*0.38;
-  const armLen = 80*scale, armW = 14*scale;
-  const camCx = w/2, camCy = pivotY + 55*scale;
-  const camR = 24*scale, eccOffset = 14*scale;
-  // cam
-  const contactX = camCx + eccOffset*Math.cos(t*0.9);
-  const contactY = camCy + eccOffset*Math.sin(t*0.9);
-  drawWoodCircle(ctx, camCx, camCy, camR);
-  drawAxle(ctx, camCx, camCy, 4*scale);
-  ctx.save(); ctx.beginPath(); ctx.arc(contactX, contactY, 3*scale, 0, Math.PI*2);
-  ctx.fillStyle=ACCENT; ctx.fill(); ctx.restore();
-  // arm angle driven by cam
-  const camTop = camCy - camR - Math.abs(eccOffset*Math.sin(t*0.9));
-  const armAngle = 0.35*Math.sin(t*0.9);
-  // arm support
-  ctx.save();
-  ctx.strokeStyle='rgba(120,90,60,0.35)'; ctx.lineWidth=2;
-  ctx.beginPath(); ctx.moveTo(pivotX, pivotY+5*scale); ctx.lineTo(pivotX, pivotY+42*scale); ctx.stroke();
-  ctx.restore();
-  // arm
-  ctx.save();
-  ctx.translate(pivotX, pivotY);
-  ctx.rotate(armAngle);
-  drawWoodRect(ctx, -armLen, -armW/2, armLen*2, armW, 5);
-  // decorative ends (like bird head/tail)
-  ctx.save();
-  ctx.beginPath(); ctx.arc(-armLen+5*scale, 0, 10*scale, 0, Math.PI*2);
-  ctx.fillStyle=WOOD_DARK; ctx.fill(); ctx.restore();
-  ctx.save();
-  ctx.beginPath(); ctx.arc(armLen-5*scale, 0, 10*scale, 0, Math.PI*2);
-  ctx.fillStyle=WOOD_DARK; ctx.fill(); ctx.restore();
-  ctx.restore();
-  // push rod from cam to arm
-  ctx.save();
-  ctx.strokeStyle=STEEL_COL; ctx.lineWidth=3*scale; ctx.setLineDash([4,3]);
-  ctx.beginPath(); ctx.moveTo(camCx, camTop); ctx.lineTo(pivotX, pivotY+3*scale); ctx.stroke();
-  ctx.setLineDash([]); ctx.restore();
-  drawAxle(ctx, pivotX, pivotY, 4*scale);
-}
-
-// ══════════════════════════════════════════════════════
-// BUILD UI
-// ══════════════════════════════════════════════════════
-const DIFF_MAP = {
-  beginner:     { label: 'Principiante', cls: 'diff-beginner' },
-  intermediate: { label: 'Intermedio',   cls: 'diff-intermediate' },
-  advanced:     { label: 'Avanzado',     cls: 'diff-advanced' }
+const STEPS={
+0:[{t:0,label:"En reposo",desc:"La leva circular esta en posicion inicial. El seguidor descansa sobre la parte mas baja del perfil."},{t:Math.PI/2,label:"Ascenso",desc:"La leva giro 90 grados. El punto excentrico sube, empujando el seguidor hacia arriba."},{t:Math.PI,label:"Punto maximo",desc:"La leva giro 180 grados. El seguidor esta en su punto mas alto, maximo desplazamiento."},{t:Math.PI*1.5,label:"Descenso",desc:"La leva gira 270 grados. El seguidor baja por gravedad volviendo al punto de contacto."}],
+1:[{t:0,label:"Posicion base",desc:"La leva ovalada esta con su eje mayor horizontal. El seguidor esta en su punto mas bajo."},{t:Math.PI/2,label:"Inicio de subida",desc:"Al girar, el perfil ovalado empieza a levantar el seguidor con un movimiento suave."},{t:Math.PI,label:"Punto alto",desc:"El eje mayor del ovalo apunta hacia arriba. El seguidor alcanza su posicion mas elevada."},{t:Math.PI*1.5,label:"Regreso",desc:"El ovalo regresa a horizontal. El seguidor desciende suavemente al punto de partida."}],
+2:[{t:0,label:"Punto muerto izq",desc:"El embolo esta en su posicion mas alejada a la izquierda. La manivela y la biela estan alineadas."},{t:Math.PI/2,label:"Mitad del recorrido",desc:"La manivela giro 90 grados. El embolo esta en el centro de su recorrido, moviendose a maxima velocidad."},{t:Math.PI,label:"Punto muerto der",desc:"El embolo llego al extremo derecho. La manivela y la biela vuelven a estar alineadas."},{t:Math.PI*1.5,label:"Regreso al centro",desc:"La manivela sigue girando. El embolo regresa al centro y luego al punto de partida."}],
+3:[{t:0,label:"Posicion inicial",desc:"El pawl (diente) esta en reposo apoyado entre dos dientes de la rueda dentada."},{t:1.5,label:"Avance",desc:"La rueda avanza un diente. El pawl se desliza sobre el diente siguiente sin resistencia."},{t:3,label:"Bloqueo",desc:"El pawl encaja entre dos dientes. Si se intenta rotar al reves, el diente lo bloquea completamente."},{t:4.5,label:"Nuevo paso",desc:"La rueda avanza otro diente. Este movimiento escalonado es ideal para mecanismos de avance preciso."}],
+4:[{t:0,label:"Reposo",desc:"Los engranajes estan inmoviles. El pinon chico tiene la mitad de dientes que la rueda grande."},{t:Math.PI/2,label:"Transmision",desc:"El pinon gira. Como tiene menos dientes, debe girar el doble de vueltas para mover la rueda grande una vez."},{t:Math.PI,label:"Inversion",desc:"Los engranajes siempre rotan en sentidos opuestos. Las flechas muestran velocidad: 2x vs 1x."},{t:Math.PI*1.5,label:"Reduccion",desc:"Una vuelta completa del pinon equivale a media vuelta de la rueda grande. Velocidad reducida, torque aumentado."}],
+5:[{t:0,label:"Reposo",desc:"La cremallera esta centrada. El pinon en su posicion inicial."},{t:Math.PI/2,label:"Traslacion",desc:"Al rotar el pinon, sus dientes empujan los de la cremallera, desplazandola horizontalmente."},{t:Math.PI,label:"Recorrido maximo",desc:"La cremallera se desplazo al maximo. Cada vuelta completa del pinon avanza la cremallera su circunferencia."},{t:Math.PI*1.5,label:"Regreso",desc:"Al girar el pinon en sentido contrario, la cremallera regresa. El movimiento es reversible y preciso."}],
+6:[{t:0,label:"Equilibrio",desc:"La palanca esta horizontal. El punto de apoyo esta en el centro, entre la fuerza y la carga."},{t:Math.PI/2,label:"Fuerza aplicada",desc:"Al presionar el brazo largo, la palanca rota. El brazo corto levanta la carga con mas fuerza."},{t:Math.PI,label:"Maximo levante",desc:"La fuerza recorrio la maxima distancia. La carga se elevo menos pero con mas fuerza."},{t:Math.PI*1.5,label:"Retorno",desc:"Al soltar, la carga vuelve a bajar. Ventaja mecanica = distancia brazo largo / brazo corto."}],
+7:[{t:0,label:"En reposo",desc:"La palanca esta horizontal. El punto de apoyo esta en el extremo izquierdo. La carga, en el centro."},{t:Math.PI/2,label:"Fuerza aplicada",desc:"Se aplica fuerza hacia arriba en el extremo derecho (el mas alejado del apoyo). La carga sube."},{t:Math.PI,label:"Levante maximo",desc:"La carga se levanto. Como esta mas cerca del fulcro que la fuerza, se necesita menos esfuerzo."},{t:Math.PI*1.5,label:"Retorno",desc:"Como una carretilla: la carga siempre esta entre el apoyo y la fuerza aplicada."}],
+8:[{t:0,label:"Posicion inicial",desc:"La leva de corazon en posicion de partida. Su perfil garantiza un movimiento uniforme, sin saltos."},{t:Math.PI/2,label:"Subida suave",desc:"El perfil curvo del corazon levanta el seguidor gradualmente. La velocidad de subida es constante."},{t:Math.PI,label:"Punto alto",desc:"El seguidor esta en su maxima altura. La transicion fue completamente suave gracias al perfil especial."},{t:Math.PI*1.5,label:"Bajada suave",desc:"El seguidor desciende a la misma velocidad. Ideal para automatas con movimientos elegantes."}],
+9:[{t:0,label:"Posicion central",desc:"Los dos discos en el eje principal estan en sus posiciones de partida, desfasados 60 grados entre si."},{t:Math.PI/2,label:"Primer disco sube",desc:"El primer disco excentrico llega a su punto mas alto. Su biela sube, moviendo la articulacion superior."},{t:Math.PI,label:"Segundo disco sube",desc:"El segundo disco empieza su ascenso. Esto genera movimientos alternados entre dos figuras."},{t:Math.PI*1.5,label:"Movimiento desfasado",desc:"Gracias al desfase angular, las dos articulaciones nunca estan en la misma posicion."}],
+10:[{t:0,label:"Posicion base",desc:"La manivela esta en su punto de partida. El brazo oscilante esta en su posicion mas a la derecha."},{t:Math.PI/2,label:"Movimiento lento",desc:"La manivela gira pero el rocker avanza lentamente: esta en la zona donde la biela tiene mucho angulo."},{t:Math.PI,label:"Velocidad maxima",desc:"El rocker pasa por el centro a su mayor velocidad. La biela empuja directamente en esta posicion."},{t:Math.PI*1.5,label:"Retorno",desc:"El rocker llega al extremo izquierdo y empieza a volver. Este mecanismo imita remos, brazos o alas."}],
+11:[{t:0,label:"Posicion inicial",desc:"El brazo esta horizontal. La leva excentrica debajo esta en su posicion mas baja, sin ejercer presion."},{t:Math.PI/2,label:"Leva empuja",desc:"Al girar la manivela, la leva excentrica sube y empuja el extremo derecho del brazo hacia arriba."},{t:Math.PI,label:"Maxima inclinacion",desc:"El brazo esta en su maxima inclinacion. El extremo izquierdo bajo al mismo tiempo que el derecho subio."},{t:Math.PI*1.5,label:"Retorno",desc:"La leva sigue girando y el brazo vuelve al centro. Perfecto para figuras que picotean o saludan."}]
 };
 
-let globalScale = 1.0;
-let animFrames = [];
+const COMBOS={
+'0-1':{desc:"La <strong>Leva Circular</strong> y la <strong>Leva Excentrica</strong> en el mismo eje producen dos seguidores con amplitudes distintas. Ideal para figuras con dos alturas de movimiento independientes.",tags:["Mismo eje","Movimientos independientes","Amplitudes distintas"]},
+'0-2':{desc:"<strong>Leva + Manivela-Biela</strong>: la leva mueve una figura verticalmente mientras la manivela mueve otra horizontalmente. Movimiento en dos dimensiones con un solo eje.",tags:["Movimiento 2D","Un solo eje de entrada","Figuras combinadas"]},
+'2-4':{desc:"<strong>Manivela-Biela + Engranajes</strong>: los engranajes reducen la velocidad antes de pasar a la manivela. El embolo se mueve mas lento pero con mas fuerza.",tags:["Reduccion de velocidad","Mayor torque","Movimiento potente"]},
+'2-9':{desc:"<strong>Manivela-Biela + Eje Excentrico</strong>: multiples discos desfasados accionan varias bielas. Perfecto para figuras con piernas, brazos o remos que se mueven alternadamente.",tags:["Multiples salidas","Movimiento alternado","Figuras con extremidades"]},
+'3-4':{desc:"<strong>Trinquete + Engranajes</strong>: el trinquete convierte oscilacion en rotacion de un sentido, que los engranajes amplifican o reducen. Clasico mecanismo de reloj de cuco.",tags:["Un sentido","Transmision de velocidad","Estilo relojeria"]},
+'4-5':{desc:"<strong>Engranajes + Cremallera</strong>: los engranajes reducen la velocidad antes de mover la cremallera. Traslacion lineal muy precisa y con mucha fuerza.",tags:["Traslacion lenta y fuerte","Alta precision","Movimiento lineal controlado"]},
+'7-10':{desc:"<strong>Palanca + Vaiven</strong>: la palanca amplifica la fuerza para accionar el rocker-crank. Util cuando el motor es debil y necesitamos mover un brazo oscilante largo.",tags:["Amplificacion de fuerza","Brazo oscilante grande","Economia de energia"]},
+'8-10':{desc:"<strong>Leva Corazon + Vaiven</strong>: la leva de corazon garantiza que el movimiento del vaiven sea perfectamente suave, sin golpes en los extremos. Ideal para alas y saludos.",tags:["Movimiento suavisimo","Sin impactos","Alas, remos, saludos"]}
+};
 
-function formatMeasure(base, scale) {
-  const val = Math.round(base * scale);
-  return val + ' mm';
+const MECHANISMS=[
+{id:1,name:"Leva Circular",difficulty:"beginner",description:"Una rueda circular montada <strong>fuera de su centro geometrico</strong> empuja un seguidor hacia arriba y abajo al girar. Es el mecanismo mas sencillo para generar movimiento vertical.",measures:[{part:"Rueda (diametro)",base:80},{part:"Desplazamiento del eje",base:12},{part:"Seguidor (largo)",base:60},{part:"Seguidor (ancho)",base:14},{part:"Guia (alto)",base:80},{part:"Espesor de madera",base:12}],draw:drawCamCircular,woodQty:[{label:"Rueda circular",area:80*80},{label:"Seguidor",area:60*14},{label:"Guia vertical",area:80*20}]},
+{id:2,name:"Leva Excentrica",difficulty:"beginner",description:"Similar a la leva circular pero con perfil <strong>ovalado</strong>. Produce un movimiento mas suave y controlado del seguidor.",measures:[{part:"Leva (largo)",base:90},{part:"Leva (ancho)",base:55},{part:"Desplazamiento del eje",base:16},{part:"Seguidor (largo)",base:65},{part:"Seguidor (ancho)",base:14},{part:"Espesor de madera",base:12}],draw:drawCamEccentrica,woodQty:[{label:"Leva ovalada",area:90*55},{label:"Seguidor",area:65*14},{label:"Guia",area:90*20}]},
+{id:3,name:"Manivela y Biela",difficulty:"intermediate",description:"Convierte rotacion continua en <strong>movimiento lineal alternativo</strong>. La manivela gira, la biela transmite la fuerza, y el embolo se desplaza de extremo a extremo.",measures:[{part:"Manivela (radio)",base:35},{part:"Biela (largo)",base:110},{part:"Embolo (largo)",base:80},{part:"Embolo (ancho)",base:18},{part:"Guia (largo)",base:160},{part:"Espesor de madera",base:14}],draw:drawCrankRod,woodQty:[{label:"Disco manivela",area:70*70},{label:"Biela",area:110*14},{label:"Embolo",area:80*18},{label:"Guia",area:160*22}]},
+{id:4,name:"Trinquete",difficulty:"intermediate",description:"Permite el <strong>movimiento en un solo sentido</strong>. Un diente (el pawl) encaja en la rueda y bloquea el retroceso.",measures:[{part:"Rueda (diametro)",base:80},{part:"Numero de dientes",base:12},{part:"Profundidad de diente",base:8},{part:"Pawl (largo)",base:40},{part:"Pawl (ancho)",base:10},{part:"Espesor de madera",base:14}],draw:drawRatchet,woodQty:[{label:"Rueda dentada",area:80*80},{label:"Pawl",area:40*10}]},
+{id:5,name:"Engranajes Simples",difficulty:"intermediate",description:"Dos ruedas dentadas para <strong>transmitir rotacion</strong> y modificar velocidad o torque.",measures:[{part:"Pinon (diametro)",base:50},{part:"Pinon (dientes)",base:10},{part:"Rueda grande (diametro)",base:100},{part:"Rueda grande (dientes)",base:20},{part:"Modulo del diente",base:5},{part:"Espesor de madera",base:14}],draw:drawGears,woodQty:[{label:"Disco pinon",area:50*50},{label:"Disco rueda grande",area:100*100}]},
+{id:6,name:"Cremallera y Pinon",difficulty:"intermediate",description:"Transforma <strong>rotacion en movimiento lineal</strong>. El pinon rueda sobre una barra dentada.",measures:[{part:"Pinon (diametro)",base:50},{part:"Pinon (dientes)",base:10},{part:"Cremallera (largo)",base:200},{part:"Cremallera (alto)",base:20},{part:"Modulo del diente",base:5},{part:"Espesor de madera",base:12}],draw:drawRackPinion,woodQty:[{label:"Disco pinon",area:50*50},{label:"Tabla cremallera",area:200*20}]},
+{id:7,name:"Palanca de 1er Grado",difficulty:"beginner",description:"El punto de apoyo esta <strong>entre la fuerza y la carga</strong>. Como una balanza.",measures:[{part:"Palanca (largo total)",base:200},{part:"Brazo de fuerza",base:130},{part:"Brazo de carga",base:70},{part:"Palanca (ancho)",base:20},{part:"Pivote (diametro)",base:10},{part:"Espesor de madera",base:14}],draw:drawLever1,woodQty:[{label:"Tabla palanca",area:200*20},{label:"Bloque fulcro",area:40*40},{label:"Bloque carga",area:30*30}]},
+{id:8,name:"Palanca de 2do Grado",difficulty:"beginner",description:"La carga esta <strong>entre el punto de apoyo y la fuerza</strong>. Como una carretilla.",measures:[{part:"Palanca (largo total)",base:200},{part:"Punto de apoyo a carga",base:70},{part:"Palanca (ancho)",base:20},{part:"Pivote (diametro)",base:10},{part:"Carga (bloque)",base:30},{part:"Espesor de madera",base:14}],draw:drawLever2,woodQty:[{label:"Tabla palanca",area:200*20},{label:"Bloque apoyo",area:40*40},{label:"Bloque carga",area:30*30}]},
+{id:9,name:"Leva de Corazon",difficulty:"advanced",description:"Un perfil en forma de corazon genera un <strong>movimiento constante y suave</strong> sin golpes.",measures:[{part:"Leva (diametro ext.)",base:90},{part:"Profundidad del corazon",base:30},{part:"Seguidor (largo)",base:70},{part:"Seguidor (ancho)",base:14},{part:"Guia (alto)",base:100},{part:"Espesor de madera",base:14}],draw:drawHeartCam,woodQty:[{label:"Disco leva corazon",area:90*90},{label:"Seguidor",area:70*14},{label:"Guia",area:100*20}]},
+{id:10,name:"Eje y Excentrica",difficulty:"intermediate",description:"Discos descentrados en el mismo eje generan <strong>movimientos desfasados</strong>, perfectos para multiples articulaciones.",measures:[{part:"Disco (diametro)",base:70},{part:"Excentricidad",base:18},{part:"Eje (diametro)",base:10},{part:"Biela (largo)",base:90},{part:"Biela (ancho)",base:12},{part:"Espesor de madera",base:12}],draw:drawEccentricShaft,woodQty:[{label:"Disco 1",area:70*70},{label:"Disco 2",area:70*70},{label:"Bielas x2",area:90*12*2}]},
+{id:11,name:"Mecanismo de Vaiven",difficulty:"intermediate",description:"Convierte rotacion en <strong>oscilacion angular alternante</strong>. Perfecto para remos, brazos y alas.",measures:[{part:"Manivela (radio)",base:30},{part:"Biela de acoplamiento",base:100},{part:"Brazo oscilante (largo)",base:80},{part:"Base (distancia entre ejes)",base:90},{part:"Ancho de piezas",base:14},{part:"Espesor de madera",base:12}],draw:drawRockerCrank,woodQty:[{label:"Disco manivela",area:60*60},{label:"Biela",area:100*14},{label:"Brazo oscilante",area:80*14},{label:"Base",area:90*20}]},
+{id:12,name:"Mecanismo de Balanceo",difficulty:"beginner",description:"Un brazo <strong>pivota sobre su centro</strong> impulsado por una leva. Como un ave que picotea.",measures:[{part:"Brazo (largo total)",base:180},{part:"Brazo (ancho)",base:16},{part:"Leva (diametro)",base:60},{part:"Desplazamiento leva",base:15},{part:"Pivote (diametro)",base:10},{part:"Espesor de madera",base:12}],draw:drawBalanceMech,woodQty:[{label:"Brazo",area:180*16},{label:"Disco leva",area:60*60}]}
+];
+
+const DIFF_MAP={beginner:{label:'Principiante',cls:'diff-beginner'},intermediate:{label:'Intermedio',cls:'diff-intermediate'},advanced:{label:'Avanzado',cls:'diff-advanced'}};
+let globalScale=1.0;
+function fmM(base,s){return Math.round(base*s)+' mm'}
+
+function drawPartSchematic(canvas,partName,base,s){
+  const ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h);const val=Math.round(base*s),ln=partName.toLowerCase();
+  ctx.save();
+  if(ln.includes('diam')||ln.includes('rueda')||ln.includes('disco')||(ln.includes('leva')&&!ln.includes('largo'))){
+    const r=Math.min(w,h)*.3;drawWoodCircle(ctx,w/2,h/2,r);drawAxle(ctx,w/2,h/2,3);
+    ctx.strokeStyle='rgba(192,57,43,0.5)';ctx.lineWidth=1;ctx.setLineDash([2,2]);
+    ctx.beginPath();ctx.moveTo(w/2,h/2);ctx.lineTo(w/2+r,h/2);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle=ACCENT;ctx.font='8px DM Mono';ctx.fillText('\u00d8'+val,w/2+r*.1,h/2-3);
+  }else if(ln.includes('largo')||ln.includes('biela')||ln.includes('brazo')||ln.includes('palanca')||ln.includes('seguidor')||ln.includes('guia')){
+    const bw=w*.82,bh=9;drawWoodRect(ctx,w*.09,h/2-bh/2,bw,bh,2);
+    ctx.strokeStyle='rgba(192,57,43,0.5)';ctx.lineWidth=1;ctx.setLineDash([2,2]);
+    ctx.beginPath();ctx.moveTo(w*.09,h/2+bh/2+4);ctx.lineTo(w*.91,h/2+bh/2+4);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle=ACCENT;ctx.font='8px DM Mono';ctx.textAlign='center';ctx.fillText(val+'mm',w/2,h/2+bh/2+12);
+  }else{
+    const bw=Math.min(38,w*.45),bh=Math.min(36,h*.68);drawWoodRect(ctx,w/2-bw/2,h/2-bh/2,bw,bh,2);
+    ctx.fillStyle=ACCENT;ctx.font='8px DM Mono';ctx.textAlign='center';ctx.fillText(val+'mm',w/2,h/2+bh/2+10);
+  }
+  ctx.restore();
 }
 
-function buildCard(mech, index) {
-  const card = document.createElement('div');
-  card.className = 'card';
+function buildPartsTab(mech,index){
+  const c=document.createElement('div');c.className='parts-grid';
+  mech.measures.forEach((m,mi)=>{
+    const item=document.createElement('div');item.className='part-item';
+    item.innerHTML=`<div class="part-name">${m.part}</div><div class="part-dim" id="pd-${index}-${mi}">${fmM(m.base,globalScale)}</div>`;
+    const cv=document.createElement('canvas');cv.className='part-canvas';cv.width=120;cv.height=40;cv.id=`pc-${index}-${mi}`;
+    item.appendChild(cv);c.appendChild(item);
+    setTimeout(()=>drawPartSchematic(cv,m.part,m.base,globalScale),60);
+  });
+  return c;
+}
 
-  const diff = DIFF_MAP[mech.difficulty];
-
-  card.innerHTML = `
+function buildCard(mech,index){
+  const card=document.createElement('div');card.className='card';
+  const diff=DIFF_MAP[mech.difficulty];
+  const steps=STEPS[index]||[];
+  card.innerHTML=`
     <div class="card-header">
       <span class="card-num">Mec. ${mech.id.toString().padStart(2,'0')}</span>
       <span class="card-title">${mech.name}</span>
-      <button class="play-btn" id="btn-${index}" title="Play/Pause">⏸</button>
+      <div class="card-btns">
+        <button class="icon-btn" id="btn-${index}" title="Play/Pause">&#9208;</button>
+        <button class="icon-btn" id="step-btn-${index}" title="Modo paso a paso">&#128209;</button>
+        <button class="icon-btn" id="pdf-icon-${index}" title="Descargar PDF">&#128196;</button>
+      </div>
     </div>
     <div class="canvas-wrap">
-      <canvas id="canvas-${index}" width="340" height="210"></canvas>
+      <canvas id="canvas-${index}" width="340" height="205"></canvas>
+      <div class="step-overlay" id="step-overlay-${index}">
+        <button class="step-nav" id="step-prev-${index}">&larr; Ant.</button>
+        <span class="step-label" id="step-lbl-${index}">1 / ${steps.length}</span>
+        <button class="step-nav" id="step-next-${index}">Sig. &rarr;</button>
+      </div>
     </div>
+    <div class="step-explanation" id="step-exp-${index}"></div>
     <div class="card-info">
       <div class="info-tabs">
         <button class="tab-btn active" data-card="${index}" data-tab="medidas">Medidas</button>
-        <button class="tab-btn" data-card="${index}" data-tab="descripcion">Descripción</button>
+        <button class="tab-btn" data-card="${index}" data-tab="piezas">Piezas</button>
+        <button class="tab-btn" data-card="${index}" data-tab="descripcion">Descripcion</button>
       </div>
       <div class="tab-panel active" id="tab-${index}-medidas">
-        <table class="measures-table">
-          <tbody>
-            ${mech.measures.map((m,mi) => `
-              <tr>
-                <td>${m.part}</td>
-                <td><span class="measure-val" id="mv-${index}-${mi}">${formatMeasure(m.base, globalScale)}</span></td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
+        <table class="measures-table"><tbody>${mech.measures.map((m,mi)=>`<tr><td>${m.part}</td><td><span class="measure-val" id="mv-${index}-${mi}">${fmM(m.base,globalScale)}</span></td></tr>`).join('')}</tbody></table>
+        <button class="pdf-btn" id="pdf-btn-${index}">&#128196; Descargar ficha PDF</button>
       </div>
+      <div class="tab-panel" id="tab-${index}-piezas"></div>
       <div class="tab-panel" id="tab-${index}-descripcion">
         <p class="desc-text">${mech.description}</p>
         <span class="difficulty-badge ${diff.cls}">${diff.label}</span>
       </div>
-    </div>
-  `;
-
+    </div>`;
   return card;
 }
 
-function startAnimation(mech, index) {
-  const canvas = document.getElementById(`canvas-${index}`);
-  const ctx = canvas.getContext('2d');
-  let t = 0;
-  let running = true;
-  let rafId;
+function startAnimation(mech,index){
+  const canvas=document.getElementById(`canvas-${index}`);
+  const ctx=canvas.getContext('2d');
+  let t=0,running=true,stepMode=false,currentStep=0,rafId;
+  const steps=STEPS[index]||[];
+  const btn=document.getElementById(`btn-${index}`);
+  const stepBtn=document.getElementById(`step-btn-${index}`);
+  const overlay=document.getElementById(`step-overlay-${index}`);
+  const stepLbl=document.getElementById(`step-lbl-${index}`);
+  const stepExp=document.getElementById(`step-exp-${index}`);
+  const prevBtn=document.getElementById(`step-prev-${index}`);
+  const nextBtn=document.getElementById(`step-next-${index}`);
 
-  const btn = document.getElementById(`btn-${index}`);
-  btn.addEventListener('click', () => {
-    running = !running;
-    btn.textContent = running ? '⏸' : '▶';
-    btn.classList.toggle('paused', !running);
-    if(running) animate();
+  btn.addEventListener('click',()=>{
+    if(stepMode)return;
+    running=!running;btn.innerHTML=running?'&#9208;':'&#9654;';btn.classList.toggle('active',!running);
+    if(running)animate();
   });
 
-  function animate() {
-    if(!running) return;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    mech.draw(ctx, canvas.width, canvas.height, t, globalScale);
-    t += 0.045;
-    rafId = requestAnimationFrame(animate);
+  stepBtn.addEventListener('click',()=>{
+    stepMode=!stepMode;stepBtn.classList.toggle('active',stepMode);
+    if(stepMode&&steps.length){
+      cancelAnimationFrame(rafId);running=false;btn.innerHTML='&#9654;';btn.classList.add('active');
+      overlay.classList.add('visible');stepExp.classList.add('visible');currentStep=0;renderStep();
+    }else{
+      overlay.classList.remove('visible');stepExp.classList.remove('visible');stepMode=false;
+      stepBtn.classList.remove('active');running=true;btn.innerHTML='&#9208;';btn.classList.remove('active');animate();
+    }
+  });
+
+  function renderStep(){
+    if(!steps.length)return;
+    const s=steps[currentStep];t=s.t;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    mech.draw(ctx,canvas.width,canvas.height,t,globalScale);
+    stepLbl.textContent=`${currentStep+1} / ${steps.length} \u2014 ${s.label}`;
+    stepExp.textContent=s.desc;
   }
 
+  prevBtn.addEventListener('click',()=>{currentStep=(currentStep-1+steps.length)%steps.length;renderStep()});
+  nextBtn.addEventListener('click',()=>{currentStep=(currentStep+1)%steps.length;renderStep()});
+
+  function animate(){
+    if(!running||stepMode)return;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    mech.draw(ctx,canvas.width,canvas.height,t,globalScale);
+    t+=0.045;rafId=requestAnimationFrame(animate);
+  }
   animate();
-  return () => { running = false; cancelAnimationFrame(rafId); };
 }
 
-function updateAllMeasures() {
-  MECHANISMS.forEach((mech, index) => {
-    mech.measures.forEach((m, mi) => {
-      const el = document.getElementById(`mv-${index}-${mi}`);
-      if(el) el.textContent = formatMeasure(m.base, globalScale);
+function generatePDF(idx){
+  const mech=MECHANISMS[idx],s=globalScale,diff=DIFF_MAP[mech.difficulty];
+  const win=window.open('','_blank');
+  const rows=mech.measures.map(m=>`<tr><td style="padding:7px 10px;border-bottom:1px solid #e8c99a;font-family:Courier New,monospace;font-size:12px;color:#7a4f2d">${m.part}</td><td style="padding:7px 10px;border-bottom:1px solid #e8c99a;font-family:Courier New,monospace;font-size:13px;font-weight:bold;color:#1c120a;text-align:right">${fmM(m.base,s)}</td></tr>`).join('');
+  const woodRows=mech.woodQty.map(w=>{const a=(w.area*s*s/100).toFixed(1);return`<tr><td style="padding:6px 10px;border-bottom:1px solid #e8c99a;font-size:11px;color:#7a4f2d">${w.label}</td><td style="padding:6px 10px;border-bottom:1px solid #e8c99a;font-size:11px;font-weight:bold;text-align:right">${a} cm²</td></tr>`}).join('');
+  const totalMM2=mech.woodQty.reduce((sum,w)=>sum+w.area*s*s,0);
+  const lineal=(totalMM2/(100*100)*1.3).toFixed(2);
+  const diffColor=diff.cls==='diff-beginner'?'#2e7d32':diff.cls==='diff-intermediate'?'#f57f17':'#c62828';
+  const diffBg=diff.cls==='diff-beginner'?'#e8f5e9':diff.cls==='diff-intermediate'?'#fff8e1':'#fce4ec';
+  win.document.write(`<!DOCTYPE html><html><head><title>Ficha - ${mech.name}</title><style>body{font-family:Georgia,serif;margin:0;background:#faf6ef;color:#1c120a}.page{max-width:680px;margin:0 auto;padding:32px 36px}.hdr{background:#3d2b1f;color:#e8c99a;padding:20px 26px;border-radius:10px 10px 0 0}.hdr h1{margin:0 0 4px;font-size:21px}.hdr p{margin:0;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#c4894e;font-family:Courier New,monospace}.bdy{background:white;border:2px solid #e8c99a;border-top:none;padding:22px 26px;border-radius:0 0 10px 10px}h2{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7a4f2d;margin:18px 0 7px;font-family:Courier New,monospace;border-bottom:1px solid #e8c99a;padding-bottom:5px}table{width:100%;border-collapse:collapse}.badge{display:inline-block;padding:3px 11px;border-radius:20px;font-size:10px;font-family:Courier New,monospace;letter-spacing:.07em;text-transform:uppercase;margin-bottom:12px}.tot td{font-weight:bold;color:#3d2b1f;background:rgba(196,137,78,.1)}.foot{text-align:center;margin-top:20px;font-size:10px;color:#c4894e;font-family:Courier New,monospace;letter-spacing:.1em}.desc{font-size:12px;line-height:1.7;color:#4a3520}@media print{body{background:white}.page{padding:18px}}</style></head><body><div class="page"><div class="hdr"><h1>Mecanismo ${mech.id.toString().padStart(2,'0')} &mdash; ${mech.name}</h1><p>Automatas de Madera &middot; Ficha Tecnica &middot; Escala ${s.toFixed(1)}x</p></div><div class="bdy"><span class="badge" style="background:${diffBg};color:${diffColor};border:1px solid ${diffColor}">${diff.label}</span><h2>Descripcion</h2><p class="desc">${mech.description.replace(/<[^>]+>/g,'')}</p><h2>Medidas de las piezas</h2><table><tbody>${rows}</tbody></table><h2>Madera necesaria</h2><table><tbody>${woodRows}<tr class="tot"><td style="padding:7px 10px;font-size:12px">Total estimado (con 30% desperdicio)</td><td style="padding:7px 10px;font-size:13px;text-align:right">${lineal} m lineales de tabla 10cm</td></tr></tbody></table><div class="foot">Simulador de Automatas de Madera &middot; ${new Date().toLocaleDateString('es-AR')} &middot; Medidas en mm</div></div></div><script>window.onload=()=>window.print()<\/script></body></html>`);
+  win.document.close();
+}
+
+let selCalcMech=null;
+function updateCalcResult(){
+  const result=document.getElementById('calcResult');
+  const qty=parseInt(document.getElementById('calcQty').value)||1;
+  if(selCalcMech===null){result.innerHTML='<div style="text-align:center;color:var(--wood-mid);font-size:0.78rem;padding:10px 0">Selecciona un mecanismo para ver el calculo</div>';return}
+  const mech=MECHANISMS[selCalcMech],s=globalScale;
+  const rows=mech.woodQty.map(w=>{const a=(w.area*s*s/100).toFixed(1),tot=(w.area*s*s*qty/100).toFixed(1);return`<div class="calc-result-row"><span class="calc-result-label">${w.label}</span><span class="calc-result-val">${a} cm² x ${qty} = ${tot} cm²</span></div>`}).join('');
+  const total=mech.woodQty.reduce((sum,w)=>sum+w.area*s*s,0);
+  const lineal=(total*qty/(100*100)*1.3).toFixed(2);
+  result.innerHTML=rows+`<div class="calc-result-row" style="margin-top:5px;padding-top:5px;border-top:2px solid rgba(196,137,78,.28)"><span class="calc-result-label calc-total">Tabla 10cm necesaria</span><span class="calc-result-val calc-total">${lineal} m lineales</span></div>`;
+}
+
+let comboT=0,comboRaf;
+function getComboKey(a,b){return[Math.min(a,b),Math.max(a,b)].join('-')}
+function updateCombo(){
+  const a=parseInt(document.getElementById('comboA').value);
+  const b=parseInt(document.getElementById('comboB').value);
+  const key=getComboKey(a,b);
+  const info=COMBOS[key];
+  const descEl=document.getElementById('comboDesc');
+  const tagsEl=document.getElementById('comboTags');
+  if(info){descEl.innerHTML=info.desc;tagsEl.innerHTML=info.tags.map(t=>`<span class="combo-tag">${t}</span>`).join('')}
+  else{descEl.innerHTML=`<strong>${MECHANISMS[a].name}</strong> + <strong>${MECHANISMS[b].name}</strong>: estos dos mecanismos pueden usarse en el mismo automata para generar movimientos independientes. Montados en ejes separados, cada uno aporta su tipo de movimiento caracteristico.`;tagsEl.innerHTML='<span class="combo-tag">Ejes independientes</span><span class="combo-tag">Movimientos multiples</span>'}
+  cancelAnimationFrame(comboRaf);animateCombo(a,b);
+}
+function animateCombo(a,b){
+  const canvas=document.getElementById('comboCanvas');
+  const ctx=canvas.getContext('2d');
+  const w=canvas.width,h=canvas.height;
+  function loop(){
+    ctx.clearRect(0,0,w,h);
+    ctx.save();ctx.scale(.5,.5);ctx.translate(8,h*.5);MECHANISMS[a].draw(ctx,w*.9,h*1.85,comboT,.6);ctx.restore();
+    ctx.save();ctx.scale(.5,.5);ctx.translate(w*.98,h*.5);MECHANISMS[b].draw(ctx,w*.9,h*1.85,comboT,.6);ctx.restore();
+    ctx.save();ctx.strokeStyle='rgba(196,137,78,0.38)';ctx.lineWidth=1.5;ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(w/2,8);ctx.lineTo(w/2,h-8);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='rgba(192,57,43,0.75)';ctx.font='16px sans-serif';ctx.textAlign='center';ctx.fillText('\uD83D\uDD17',w/2,h/2+5);ctx.restore();
+    comboT+=0.045;comboRaf=requestAnimationFrame(loop);
+  }
+  loop();
+}
+
+// INIT
+const grid=document.getElementById('mechGrid');
+MECHANISMS.forEach((mech,i)=>{
+  const card=buildCard(mech,i);grid.appendChild(card);
+  document.getElementById(`tab-${i}-piezas`).appendChild(buildPartsTab(mech,i));
+  startAnimation(mech,i);
+  document.getElementById(`pdf-btn-${i}`).addEventListener('click',()=>generatePDF(i));
+  document.getElementById(`pdf-icon-${i}`).addEventListener('click',()=>generatePDF(i));
+});
+
+document.addEventListener('click',e=>{
+  if(e.target.classList.contains('tab-btn')){
+    const ci=e.target.dataset.card,tn=e.target.dataset.tab;
+    const ci2=e.target.closest('.card-info');
+    ci2.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    ci2.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    e.target.classList.add('active');document.getElementById(`tab-${ci}-${tn}`).classList.add('active');
+  }
+});
+
+document.getElementById('globalScale').addEventListener('input',function(){
+  globalScale=parseFloat(this.value);
+  document.getElementById('scaleBadge').textContent=globalScale.toFixed(1)+'x';
+  MECHANISMS.forEach((mech,index)=>{
+    mech.measures.forEach((m,mi)=>{
+      const el=document.getElementById(`mv-${index}-${mi}`);if(el)el.textContent=fmM(m.base,globalScale);
+      const pd=document.getElementById(`pd-${index}-${mi}`);if(pd)pd.textContent=fmM(m.base,globalScale);
+      const pc=document.getElementById(`pc-${index}-${mi}`);if(pc)drawPartSchematic(pc,m.part,m.base,globalScale);
     });
   });
-}
-
-// Tab switching
-document.addEventListener('click', e => {
-  if(e.target.classList.contains('tab-btn')) {
-    const cardIdx = e.target.dataset.card;
-    const tabName = e.target.dataset.tab;
-    const card = e.target.closest('.card-info');
-    card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    card.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    e.target.classList.add('active');
-    document.getElementById(`tab-${cardIdx}-${tabName}`).classList.add('active');
-  }
+  updateCalcResult();
 });
 
-// Global scale
-document.getElementById('globalScale').addEventListener('input', function() {
-  globalScale = parseFloat(this.value);
-  document.getElementById('scaleBadge').textContent = globalScale.toFixed(1) + '×';
-  updateAllMeasures();
-});
+document.getElementById('calcBtn').addEventListener('click',()=>document.getElementById('calcModal').classList.add('open'));
+document.getElementById('calcClose').addEventListener('click',()=>document.getElementById('calcModal').classList.remove('open'));
+document.getElementById('calcModal').addEventListener('click',e=>{if(e.target===document.getElementById('calcModal'))document.getElementById('calcModal').classList.remove('open')});
 
-// Init
-const grid = document.getElementById('mechGrid');
-MECHANISMS.forEach((mech, i) => {
-  const card = buildCard(mech, i);
-  grid.appendChild(card);
-  startAnimation(mech, i);
+const calcMechContainer=document.getElementById('calcMechBtns');
+MECHANISMS.forEach((m,i)=>{
+  const btn=document.createElement('button');btn.className='calc-mech-btn';
+  btn.textContent=`${m.id}. ${m.name}`;
+  btn.addEventListener('click',()=>{document.querySelectorAll('.calc-mech-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');selCalcMech=i;updateCalcResult()});
+  calcMechContainer.appendChild(btn);
 });
+document.getElementById('calcQty').addEventListener('input',updateCalcResult);
+
+document.getElementById('comboBtn').addEventListener('click',()=>{document.getElementById('comboModal').classList.add('open');updateCombo()});
+document.getElementById('comboClose').addEventListener('click',()=>{document.getElementById('comboModal').classList.remove('open');cancelAnimationFrame(comboRaf)});
+document.getElementById('comboModal').addEventListener('click',e=>{if(e.target===document.getElementById('comboModal')){document.getElementById('comboModal').classList.remove('open');cancelAnimationFrame(comboRaf)}});
+
+const cA=document.getElementById('comboA'),cB=document.getElementById('comboB');
+MECHANISMS.forEach((m,i)=>{
+  const o1=document.createElement('option');o1.value=i;o1.textContent=`${m.id}. ${m.name}`;cA.appendChild(o1);
+  const o2=document.createElement('option');o2.value=i;o2.textContent=`${m.id}. ${m.name}`;cB.appendChild(o2);
+});
+cB.value='1';cA.addEventListener('change',updateCombo);cB.addEventListener('change',updateCombo);
 </script>
 </body>
 </html>
